@@ -8,12 +8,12 @@ const EXP=[
 ];
 
 const PROJ=[
-  {icon:"fas fa-robot",title:"AI Chatbot Assistant",desc:"Context-aware chatbot using Python NLP. Intent classification and entity extraction with a React frontend for real-time conversations.",stack:["Python","NLP","React","REST API"],gh:"https://github.com/palakthakur"},
+  {icon:"fas fa-robot",title:"AI Chatbot Assistant",desc:"Context-aware chatbot using Python NLP. Intent classification and entity extraction with a React frontend for real-time conversations.",stack:["Python","NLP","React","REST API"],gh:"https://github.com/palakthakur07"},
   {icon:"fas fa-chart-line",title:"Sentiment Analyser",desc:"LSTM-based model trained on Twitter data achieving ~89% accuracy. Includes a live dashboard with Chart.js visualisations.",stack:["Python","TensorFlow","LSTM","Chart.js"],gh:"https://github.com/palakthakur"},
-  {icon:"fas fa-bolt",title:"Smart Energy Monitor",desc:"IoT system combining Arduino hardware with ML prediction models to track and forecast household power consumption patterns.",stack:["Arduino","Python","IoT","ML"],gh:"https://github.com/palakthakur"},
-  {icon:"fas fa-tasks",title:"Gamified Study Planner",desc:"React web app with task management, Pomodoro timer, streak tracking and progress visualisation to help students hit academic goals.",stack:["React","JavaScript","CSS","LocalStorage"],gh:"https://github.com/palakthakur"},
-  {icon:"fas fa-search",title:"Image Classifier CNN",desc:"Convolutional Neural Network on CIFAR-10 achieving 91% accuracy with data augmentation, dropout regularisation and batch normalisation.",stack:["Python","Keras","CNN","NumPy"],gh:"https://github.com/palakthakur"},
-  {icon:"fas fa-trophy",title:"DSA Practice Tracker",desc:"Personal dashboard syncing with LeetCode to visualise problem-solving progress, identify weak areas and suggest daily practice targets.",stack:["JavaScript","LeetCode API","Chart.js","HTML/CSS"],gh:"https://github.com/palakthakur"},
+  {icon:"fas fa-bolt",title:"Smart Energy Monitor",desc:"IoT system combining Arduino hardware with ML prediction models to track and forecast household power consumption patterns.",stack:["Arduino","Python","IoT","ML"],gh:"https://github.com/palakthakur07"},
+  {icon:"fas fa-tasks",title:"Gamified Study Planner",desc:"React web app with task management, Pomodoro timer, streak tracking and progress visualisation to help students hit academic goals.",stack:["React","JavaScript","CSS","LocalStorage"],gh:"https://github.com/palakthakur07"},
+  {icon:"fas fa-search",title:"Image Classifier CNN",desc:"Convolutional Neural Network on CIFAR-10 achieving 91% accuracy with data augmentation, dropout regularisation and batch normalisation.",stack:["Python","Keras","CNN","NumPy"],gh:"https://github.com/palakthakur07"},
+  {icon:"fas fa-trophy",title:"DSA Practice Tracker",desc:"Personal dashboard syncing with LeetCode to visualise problem-solving progress, identify weak areas and suggest daily practice targets.",stack:["JavaScript","LeetCode API","Chart.js","HTML/CSS"],gh:"https://github.com/palakthakur07"},
 ];
 
 // Render experience
