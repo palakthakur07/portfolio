@@ -1,19 +1,66 @@
 // DATA
 const EXP=[
-  {year:"2024 – Present",title:"B.Tech EEE",org:"Bhagwan Parshuram Institute of Technology, Delhi",desc:"Pursuing a rigorous engineering curriculum in Electrical & Electronics Engineering, covering circuits, signals, digital systems and mathematics — while building a self-directed specialisation in AI/ML.",tags:["EEE","BPIT","2024–2028"],icon:"fas fa-graduation-cap"},
-  {year:"2024 – Present",title:"AI / ML Self-Learning",org:"Coursera, fast.ai, Research Papers",desc:"Completed foundational courses in Machine Learning and Deep Learning. Hands-on experiments with TensorFlow, PyTorch, and scikit-learn across classification, regression, and neural network architectures.",tags:["Python","TensorFlow","scikit-learn","Deep Learning"],icon:"fas fa-brain"},
-  {year:"2024 – Present",title:"Competitive Programming",org:"LeetCode · CodeChef",desc:"Actively solving Data Structures & Algorithms problems, building consistent problem-solving habits across arrays, trees, graphs, and dynamic programming. Tracking growth through streaks and contest rankings.",tags:["DSA","LeetCode","Problem Solving"],icon:"fas fa-code"},
-  {year:"2024 – Present",title:"Full-Stack Web Development",org:"Personal Projects",desc:"Learning React, Node.js, and modern web technologies from the ground up. Building real-world applications with clean UI, REST APIs, and database integration.",tags:["React","Node.js","HTML/CSS/JS"],icon:"fas fa-laptop-code"},
-  {year:"2024",title:"12th Grade — PCM + CS",org:"Senior Secondary, Delhi",desc:"Completed Class XII with Physics, Chemistry, Mathematics, and Computer Science. Developed strong analytical and algorithmic foundations that underpin all current engineering and AI work.",tags:["PCM","Computer Science","Foundation"],icon:"fas fa-school"},
+  {
+    year:"2024 – Present",
+    title:"B.Tech EEE",
+    org:"Bhagwan Parshuram Institute of Technology, Delhi",
+    desc:"Pursuing Electrical & Electronics Engineering while developing a strong foundation in programming and software development.",
+    tags:["EEE","BPIT","2024–2028"],
+    icon:"fas fa-graduation-cap"
+  },
+
+  {
+    year:"2025 – Present",
+    title:"Software Development",
+    org:"Self Learning & Personal Projects",
+    desc:"Learning modern software development through hands-on projects, exploring web technologies, programming fundamentals, and application development.",
+    tags:["HTML","CSS","JavaScript"],
+    icon:"fas fa-laptop-code"
+  },
+
+  {
+    year:"2025 – Present",
+    title:"Competitive Programming",
+    org:"LeetCode · CodeChef",
+    desc:"Solving Data Structures and Algorithms problems to strengthen problem-solving, analytical thinking, and coding skills.",
+    tags:["DSA","LeetCode","Problem Solving"],
+    icon:"fas fa-code"
+  },
+
+  {
+    year:"2026 – Present",
+    title:"Open Source & Projects",
+    org:"Personal Portfolio & Development Projects",
+    desc:"Building projects, maintaining code on GitHub, and continuously improving development practices through practical experience.",
+    tags:["Git","GitHub","Projects"],
+    icon:"fas fa-folder-open"
+  }
 ];
 
 const PROJ=[
-  {icon:"fas fa-robot",title:"AI Chatbot Assistant",desc:"Context-aware chatbot using Python NLP. Intent classification and entity extraction with a React frontend for real-time conversations.",stack:["Python","NLP","React","REST API"],gh:"https://github.com/palakthakur07"},
-  {icon:"fas fa-chart-line",title:"Sentiment Analyser",desc:"LSTM-based model trained on Twitter data achieving ~89% accuracy. Includes a live dashboard with Chart.js visualisations.",stack:["Python","TensorFlow","LSTM","Chart.js"],gh:"https://github.com/palakthakur"},
-  {icon:"fas fa-bolt",title:"Smart Energy Monitor",desc:"IoT system combining Arduino hardware with ML prediction models to track and forecast household power consumption patterns.",stack:["Arduino","Python","IoT","ML"],gh:"https://github.com/palakthakur07"},
-  {icon:"fas fa-tasks",title:"Gamified Study Planner",desc:"React web app with task management, Pomodoro timer, streak tracking and progress visualisation to help students hit academic goals.",stack:["React","JavaScript","CSS","LocalStorage"],gh:"https://github.com/palakthakur07"},
-  {icon:"fas fa-search",title:"Image Classifier CNN",desc:"Convolutional Neural Network on CIFAR-10 achieving 91% accuracy with data augmentation, dropout regularisation and batch normalisation.",stack:["Python","Keras","CNN","NumPy"],gh:"https://github.com/palakthakur07"},
-  {icon:"fas fa-trophy",title:"DSA Practice Tracker",desc:"Personal dashboard syncing with LeetCode to visualise problem-solving progress, identify weak areas and suggest daily practice targets.",stack:["JavaScript","LeetCode API","Chart.js","HTML/CSS"],gh:"https://github.com/palakthakur07"},
+  {
+    icon:"fas fa-car-crash",
+    title:"RoadSOS",
+    desc:"A road assistance platform designed to help users during emergencies by providing quick access to support services and essential information through a simple and responsive interface.",
+    stack:["HTML","CSS","JavaScript"],
+    gh:"https://github.com/palakthakur07"
+  },
+
+  {
+    icon:"fas fa-shield-alt",
+    title:"CodeHer Elite",
+    desc:"A hackathon project focused on deepfake detection. The platform helps users identify potentially manipulated media using AI-based analysis and provides an accessible interface for uploading and evaluating content.",
+    stack:["HTML","CSS","JavaScript","AI"],
+    gh:"https://github.com/palakthakur07"
+  },
+
+  {
+    icon:"fas fa-user",
+    title:"Personal Portfolio",
+    desc:"A responsive portfolio website showcasing my projects, technical skills, achievements, and learning journey as an Electrical & Electronics Engineering student interested in software development.",
+    stack:["HTML","CSS","JavaScript"],
+    gh:"https://github.com/palakthakur07"
+  }
 ];
 
 // Render experience
@@ -70,7 +117,7 @@ const GALLERY_ITEMS=[
   {caption:"Achievements",bg:"#F5E8F7",icon:"fas fa-trophy"},
   {caption:"Academic Journey",bg:"#FFF0F5",icon:"fas fa-graduation-cap"},
   {caption:"Hackathons",bg:"#FDE0EE",icon:"fas fa-bolt"},
-  {caption:"AI/ML Projects",bg:"#F9ECF5",icon:"fas fa-brain"},
+  {caption:"Projects",bg:"#F9ECF5",icon:"fas fa-brain"},
 ];
 // Crop modal
 const cropModal=document.createElement('div');
@@ -315,12 +362,12 @@ document.getElementById('ham').addEventListener('click',()=>{
       html.removeAttribute('data-theme');
       icon.className='fas fa-moon';
       localStorage.setItem('pt-theme','light');
-      toast('☀️ Light mode — fresh and clean!');
+      toast('☀️ Light mode');
     } else {
       html.setAttribute('data-theme','dark');
       icon.className='fas fa-sun';
       localStorage.setItem('pt-theme','dark');
-      toast('🌙 Dark mode — deep magenta vibes!');
+      toast('🌙 Dark mode ');
     }
     spawnSparkles(btn.getBoundingClientRect().left+19, btn.getBoundingClientRect().top+19, 8);
   });
