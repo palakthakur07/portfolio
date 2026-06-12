@@ -23,25 +23,6 @@
   <div class="loader-line"><div class="loader-fill"></div></div>
 </div>
 
-<!-- GAME HUD -->
-<div id="hud">
-  <div class="hud-label">Profile explored</div>
-  <div class="hud-stars">
-    <span class="hud-star">★</span><span class="hud-star">★</span>
-    <span class="hud-star">★</span><span class="hud-star">★</span>
-    <span class="hud-star">★</span><span class="hud-star">★</span>
-  </div>
-  <div class="hud-pbar"><div class="hud-pfill" id="hpf"></div></div>
-  <div class="hud-pct"><span id="hpct">0%</span> complete</div>
-  <div class="hud-badges-row">
-    <span class="hud-b" title="Explorer">🔍</span>
-    <span class="hud-b" title="Reader">📖</span>
-    <span class="hud-b" title="Researcher">🔬</span>
-    <span class="hud-b" title="Builder">🛠️</span>
-    <span class="hud-b" title="Creative">🎨</span>
-    <span class="hud-b" title="Champion">🏆</span>
-  </div>
-</div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -54,6 +35,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#achievements">Achievements</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#contact" class="nav-cta">Contact</a></li>
     <li><button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle light / dark mode"><i class="fas fa-moon" id="theme-icon"></i></button></li>
@@ -87,8 +69,10 @@
     <div class="hero-right rv2">
       <div class="hero-deco">✦</div>
       <div class="hero-img-frame" id="heroMascot">
-        <!-- Replace with: <img src="your-photo.jpg" style="width:100%;height:100%;object-fit:cover"> -->
-        <div class="hero-img-emoji"><i class="fas fa-user" style="font-size:5rem;color:var(--pink);opacity:.35"></i></div>
+        <input type="file" id="heroPhotoInput" accept="image/*" hidden>
+        <img id="heroPreview" class="photo-upload-preview" alt="Your uploaded photo">
+        <div class="hero-img-emoji" id="heroEmoji"><i class="fas fa-user" style="font-size:5rem;color:var(--pink);opacity:.35"></i></div>
+        <label for="heroPhotoInput" class="photo-upload-btn" title="Upload your photo"><i class="fas fa-plus"></i></label>
       </div>
       <div class="hero-img-badge">
         <div class="hib-icon">⚡</div>
@@ -125,11 +109,11 @@
       </div>
       <div>
         <div class="about-photo-stack rv">
-          <div class="ap-img ap-main" style="background:var(--pink-mist);display:flex;align-items:center;justify-content:center">
-            <i class="fas fa-user" style="font-size:4rem;color:var(--pink);opacity:.3"></i>
-          </div>
-          <div class="ap-img ap-accent" style="background:var(--pink-pale);display:flex;align-items:center;justify-content:center">
-            <i class="fas fa-graduation-cap" style="font-size:2rem;color:var(--pink);opacity:.3"></i>
+          <input type="file" id="aboutMainInput" accept="image/*" hidden>
+          <div class="ap-img ap-main" id="aboutMainFrame" style="background:var(--pink-mist);display:flex;align-items:center;justify-content:center">
+            <img id="aboutMainPreview" class="photo-upload-preview" alt="Main photo preview">
+            <i id="aboutMainIcon" class="fas fa-user" style="font-size:4rem;color:var(--pink);opacity:.3"></i>
+            <label for="aboutMainInput" class="photo-upload-btn small" title="Upload main photo"><i class="fas fa-plus"></i></label>
           </div>
           <div class="ap-tag">Palak Thakur — Class of 2028</div>
         </div>
@@ -185,6 +169,37 @@
     <h2 class="sec-title rv">Selected <em>Projects</em></h2>
     <p class="sec-desc rv2">A curated set of builds spanning AI/ML, full-stack web development, and IoT — each solving a real problem.</p>
     <div class="proj-grid" id="projGrid"></div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="sec">
+  <div class="sec-inner">
+    <span class="sec-label rv">Achievements</span>
+    <h2 class="sec-title rv">Milestones &amp; <em>Recognitions</em></h2>
+    <p class="sec-desc rv2">A quick snapshot of the competitions, learning milestones, and technical wins that shaped my journey so far.</p>
+    <div class="ach-grid rv3">
+      <article class="ach-card">
+        <div class="ach-icon"><i class="fas fa-trophy"></i></div>
+        <h3>Hackathon Participation</h3>
+        <p>Built and presented AI-focused project ideas in collaborative hackathon environments.</p>
+      </article>
+      <article class="ach-card">
+        <div class="ach-icon"><i class="fas fa-code"></i></div>
+        <h3>DSA &amp; Coding Growth</h3>
+        <p>Strengthened problem-solving skills through consistent practice on coding platforms.</p>
+      </article>
+      <article class="ach-card">
+        <div class="ach-icon"><i class="fas fa-brain"></i></div>
+        <h3>AI / ML Exploration</h3>
+        <p>Developed a strong interest in machine learning, deepfake detection, and intelligent systems.</p>
+      </article>
+      <article class="ach-card">
+        <div class="ach-icon"><i class="fas fa-laptop-code"></i></div>
+        <h3>Portfolio &amp; Web Builds</h3>
+        <p>Created responsive, modern web projects to showcase technical skills and design thinking.</p>
+      </article>
+    </div>
   </div>
 </section>
 
