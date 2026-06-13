@@ -4,84 +4,55 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Palak Thakur — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-<link rel="stylesheet" href="style.css">
-<style>
- 
-</style>
+<link rel="stylesheet" href="style.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 </head>
 <body>
-<div id="cur"></div>
-<div id="cur2"></div>
-<div id="toast"></div>
-
-<!-- LOADER -->
-<div id="loader">
-  <div class="loader-name">Palak <span>Thakur</span></div>
-  <div class="loader-sub">Portfolio — EEE × Software Development</div>
-  <div class="loader-line"><div class="loader-fill"></div></div>
-</div>
-
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#home" class="nav-logo" style="width:38px;height:38px;border-radius:50%;background:var(--pink);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;letter-spacing:-.02em;text-decoration:none;flex-shrink:0">PT</a>
+  <a href="#home" class="nav-logo">Palak <span>Thakur</span></a>
   <button class="nav-ham" id="ham" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
-  <ul class="nav-menu" id="navmenu">
-    <li><a href="#home">Home</a></li>
+  <ul class="nav-links" id="navmenu">
+    <li><a href="#home" class="active">Home</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
     <li><a href="#achievements">Achievements</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#contact" class="nav-cta">Contact</a></li>
-    <li><button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle light / dark mode"><i class="fas fa-moon" id="theme-icon"></i></button></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="home">
-  <div class="hero-wrap">
-    <div class="hero-left rv">
-      <div class="kicker">
-        <i class="fas fa-circle" style="font-size:.4rem"></i>
-        Available for opportunities
-      </div>
-      <h1 class="hero-name">Palak<br><em>Thakur.</em></h1>
-      <p class="hero-sub">B.Tech Electrical &amp; Electronics Engineering student at BPIT, building a future at the intersection of circuits, code, and artificial intelligence.</p>
-      <div class="hero-actions">
-        <a href="#experience" class="btn btn-solid" id="unlockBtn">
-          <i class="fas fa-unlock-alt" style="font-size:.75rem"></i>
-          Unlock My Story
-        </a>
-        <a href="#projects" class="btn btn-outline">View Projects</a>
-      </div>
-      <div class="hero-chips">
-        <span class="chip">EEE · 2024–2028</span>
-        <span class="chip">AI / ML</span>
-        <span class="chip">Full Stack</span>
-        <span class="chip">BPIT, Delhi</span>
-      </div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Welcome to the portfolio of <span>Palak Thakur</span></div>
+    <h1 class="hero-name">Palak <span>Thakur</span></h1>
+    <p class="hero-desc">B.Tech Electrical &amp; Electronics Engineering student at BPIT Delhi, building at the intersection of circuits, code, and artificial intelligence.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Contact Me
+      </a>
+      <a href="https://github.com/palakthakur07" target="_blank" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        GitHub
+      </a>
+      <a href="#" class="btn btn-ghost" id="resumeBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Resume
+      </a>
     </div>
-    <div class="hero-right rv2">
-      <div class="hero-deco">✦</div>
-      <div class="hero-img-frame" id="heroMascot">
-        <input type="file" id="heroPhotoInput" accept="image/*" hidden>
-        <img id="heroPreview" class="photo-upload-preview" alt="Your uploaded photo">
-        <div class="hero-img-emoji" id="heroEmoji"><i class="fas fa-user" style="font-size:5rem;color:var(--pink);opacity:.35"></i></div>
-        <label for="heroPhotoInput" class="photo-upload-btn" title="Upload your photo"><i class="fas fa-plus"></i></label>
-      </div>
-      <div class="hero-img-badge">
-        <div class="hib-icon">⚡</div>
-        <div class="hib-text">
-          <span class="hib-top">BPIT, Delhi</span>
-          <span class="hib-bot">B.Tech EEE · Batch of 2028</span>
-        </div>
-      </div>
+    <div class="marquee-wrap">
+      <div class="marquee-track" id="marquee"></div>
     </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
   </div>
 </section>
 
@@ -89,75 +60,42 @@
 <section id="about" class="sec">
   <div class="sec-inner">
     <div class="about-grid">
-      <div>
-        <span class="sec-label rv">About Me</span>
-        <h2 class="sec-title rv">Engineering meets<br><em>intelligence.</em></h2>
-        <div class="divider rv"></div>
-        <div class="rv2">
+      <div class="about-img-col">
+        <div class="about-img-frame" id="aboutFrame">
+          <input type="file" accept="image/*" id="aboutInput"/>
+          <img id="aboutImg" alt="Palak Thakur"/>
+          <div class="about-img-placeholder" id="aboutPlaceholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <span>Click + to upload photo</span>
+          </div>
+          <label for="aboutInput" class="upload-btn" title="Upload photo">+</label>
+        </div>
+      </div>
+      <div class="about-text-col">
+        <div class="sec-label">About Me</div>
+        <h2 class="sec-title">Engineering meets<br><span>intelligence.</span></h2>
         <p>I'm <strong>Palak Thakur</strong>, a second-year B.Tech student in <strong>Electrical &amp; Electronics Engineering</strong> at Bhagwan Parshuram Institute of Technology, Delhi, with a strong interest in software development and emerging technologies.</p>
-
-<p>I'm passionate about building things with code and constantly exploring new areas of technology. From developing web applications and solving programming challenges to learning modern tools and frameworks, I enjoy turning ideas into real-world solutions.</p>
-
-<p>As I continue my engineering journey, I'm focused on strengthening my development skills, expanding my technical knowledge, and building projects that create meaningful impact.</p>
-        </div>
-        <div class="info-row rv3">
-          <div class="info-item"><i class="fas fa-map-marker-alt"></i> Delhi, India</div>
-          <div class="info-item"><i class="fas fa-graduation-cap"></i> BPIT — B.Tech EEE, 2024–2028</div>
-          <div class="info-item"><i class="fas fa-brain"></i> Building Intelligent Systems</div>
-          <div class="info-item"><i class="fas fa-code"></i> Full-Stack Developer</div>
+        <p>Passionate about building with code — from web applications to ML systems. I enjoy turning ideas into real-world solutions that create meaningful impact.</p>
+        <div class="info-chips">
+          <div class="info-chip"><span class="ic-dot">📍</span> Delhi, India</div>
+          <div class="info-chip"><span class="ic-dot">🎓</span> BPIT — B.Tech EEE, 2024–2028</div>
+          <div class="info-chip"><span class="ic-dot">🧠</span> AI / ML · Full-Stack Developer</div>
+          <div class="info-chip"><span class="ic-dot">⚡</span> Building Intelligent Systems</div>
         </div>
       </div>
-      <div>
-        <div class="about-photo-stack rv">
-          <input type="file" id="aboutMainInput" accept="image/*" hidden>
-          <div class="ap-img ap-main" id="aboutMainFrame" style="background:var(--pink-mist);display:flex;align-items:center;justify-content:center">
-            <img id="aboutMainPreview" class="photo-upload-preview" alt="Main photo preview">
-            <i id="aboutMainIcon" class="fas fa-user" style="font-size:4rem;color:var(--pink);opacity:.3"></i>
-            <label for="aboutMainInput" class="photo-upload-btn small" title="Upload main photo"><i class="fas fa-plus"></i></label>
-          </div>
-          <div class="ap-tag">Palak Thakur — Class of 2028</div>
-        </div>
-        <div class="about-right-stats rv2" style="margin-top:1.5rem">
-          <div class="stat-box">
-            <div class="stat-num">2024</div>
-            <div class="stat-label">Started B.Tech EEE at BPIT</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-num">AI/ML</div>
-            <div class="stat-label">Primary interest</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-num">3+</div>
-            <div class="stat-label">Projects built</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Skills -->
-    <div class="skills-block rv" style="max-width:560px;margin-top:3rem">
-      <h3>Technical Skills</h3>
-      <div class="skill-row"><div class="skill-head"><span>Python</span><span>85%</span></div><div class="skill-bg"><div class="skill-fill" data-w="85"></div></div></div>
-      <div class="skill-row"><div class="skill-head"><span>Machine Learning</span><span>78%</span></div><div class="skill-bg"><div class="skill-fill" data-w="78"></div></div></div>
-      <div class="skill-row"><div class="skill-head"><span>Web Development (React, JS, CSS)</span><span>80%</span></div><div class="skill-bg"><div class="skill-fill" data-w="80"></div></div></div>
-      <div class="skill-row"><div class="skill-head"><span>C / C++</span><span>72%</span></div><div class="skill-bg"><div class="skill-fill" data-w="72"></div></div></div>
-      <div class="skill-row"><div class="skill-head"><span>Data Structures &amp; Algorithms</span><span>75%</span></div><div class="skill-bg"><div class="skill-fill" data-w="75"></div></div></div>
-      <div class="skill-row"><div class="skill-head"><span>Deep Learning / TensorFlow</span><span>70%</span></div><div class="skill-bg"><div class="skill-fill" data-w="70"></div></div></div>
     </div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
-<section id="experience" class="sec">
+<section id="experience" class="sec sec-alt">
   <div class="sec-inner">
-    <div class="exp-grid">
-      <div class="exp-nav rv">
-        <span class="sec-label">Timeline</span>
-        <h2 class="sec-title" style="font-size:1.8rem">My<br><em>Journey</em></h2>
-        <div class="divider"></div>
-        <div id="expNav"></div>
-      </div>
-      <div class="exp-cards rv2" id="expCards"></div>
+    <div class="sec-label">Timeline</div>
+    <h2 class="sec-title">My <span>Journey</span></h2>
+    <p class="sec-subdesc">The positions and milestones in my career so far</p>
+    <div class="exp-wrap">
+      <div class="exp-nav" id="expNav"></div>
+      <div class="exp-cards" id="expCards"></div>
     </div>
   </div>
 </section>
@@ -165,95 +103,77 @@
 <!-- PROJECTS -->
 <section id="projects" class="sec">
   <div class="sec-inner">
-    <span class="sec-label rv">Work</span>
-    <h2 class="sec-title rv">Selected <em>Projects</em></h2>
-    <p class="sec-desc rv2">A curated set of builds spanning AI/ML, full-stack web development, and IoT — each solving a real problem.</p>
-    <div class="proj-grid" id="projGrid"></div>
+    <div class="sec-label">Work</div>
+    <h2 class="sec-title">Featured <span>Projects</span></h2>
+    <p class="sec-subdesc">Here are some of the most recent projects I have been working on</p>
+    <div class="proj-list" id="projList"></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="sec sec-alt">
+  <div class="sec-inner">
+    <div class="sec-label">Expertise</div>
+    <h2 class="sec-title">Technical <span>Skills</span></h2>
+    <p class="sec-subdesc">Languages, frameworks, tools, and platforms I work with.</p>
+    <div class="skills-cats" id="skillsCats"></div>
   </div>
 </section>
 
 <!-- ACHIEVEMENTS -->
 <section id="achievements" class="sec">
   <div class="sec-inner">
-    <span class="sec-label rv">Achievements</span>
-    <h2 class="sec-title rv">Milestones &amp; <em>Recognitions</em></h2>
-    <p class="sec-desc rv2">A quick snapshot of the competitions, learning milestones, and technical wins that shaped my journey so far.</p>
-    <div class="ach-grid rv3">
-      <article class="ach-card">
-        <div class="ach-icon"><i class="fas fa-trophy"></i></div>
-        <h3>Hackathon Participation</h3>
-        <p>Built and presented AI-focused project ideas in collaborative hackathon environments.</p>
-      </article>
-      <article class="ach-card">
-        <div class="ach-icon"><i class="fas fa-code"></i></div>
-        <h3>DSA &amp; Coding Growth</h3>
-        <p>Strengthened problem-solving skills through consistent practice on coding platforms.</p>
-      </article>
-      <article class="ach-card">
-        <div class="ach-icon"><i class="fas fa-brain"></i></div>
-        <h3>AI / ML Exploration</h3>
-        <p>Developed a strong interest in machine learning, deepfake detection, and intelligent systems.</p>
-      </article>
-      <article class="ach-card">
-        <div class="ach-icon"><i class="fas fa-laptop-code"></i></div>
-        <h3>Portfolio &amp; Web Builds</h3>
-        <p>Created responsive, modern web projects to showcase technical skills and design thinking.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-
-<section id="gallery" class="sec">
-  <div class="sec-inner">
-    <span class="sec-label rv">Gallery</span>
-    <h2 class="sec-title rv">A Glimpse Into <em>My World</em></h2>
-    <p class="sec-desc rv2">Click any tile to upload your photo — campus life, events, hackathons, and more.</p>
-    <div class="gallery-row rv" id="galleryRow"></div>
+    <div class="sec-label">Achievements</div>
+    <h2 class="sec-title">Milestones &amp; <span>Recognitions</span></h2>
+    <p class="sec-subdesc">A quick snapshot of competitions, learning milestones, and technical wins.</p>
+    <div class="ach-grid" id="achGrid"></div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="sec">
+<section id="contact" class="sec sec-alt">
   <div class="sec-inner">
+    <div class="sec-label">Contact</div>
     <div class="contact-grid">
-      <div>
-        <span class="sec-label rv">Contact</span>
-        <h2 class="contact-left rv" style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;letter-spacing:-.03em;margin-bottom:1rem;line-height:1.2;color:var(--text)">Let's build<br><em style="color:var(--pink);font-style:italic">something great.</em></h2>
-        <p class="rv2" style="font-size:.95rem;color:var(--text-2);font-weight:300;line-height:1.8;margin-bottom:2rem">Whether you want to collaborate on a project, discuss AI/ML, or just say hello — my inbox is always open.</p>
-        <div class="contact-socials rv3">
-          <a href="https://github.com/palakthakur07" target="_blank" class="soc-link">
-            <div class="soc-icon gh"><i class="fab fa-github"></i></div>
-            <div class="soc-text"><span class="soc-name">GitHub</span><span class="soc-handle">github.com/palakthakur</span></div>
-            <i class="fas fa-arrow-right" style="margin-left:auto;font-size:.7rem;color:var(--text-3)"></i>
+      <div class="contact-left">
+        <h2 class="contact-title">Let's build<br><span>something great.</span></h2>
+        <p class="contact-sub">Whether you want to collaborate on a project, discuss AI/ML, or just say hello — my inbox is always open.</p>
+        <div class="social-links">
+          <a href="https://github.com/palakthakur07" target="_blank" class="soc">
+            <div class="soc-ico">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </div>
+            <div class="soc-text"><span class="soc-name">GitHub</span><span class="soc-handle">github.com/palakthakur07</span></div>
+            <span class="soc-arr">↗</span>
           </a>
-          <a href="https://linkedin.com/in/palakthakur2007" target="_blank" class="soc-link">
-            <div class="soc-icon li"><i class="fab fa-linkedin-in"></i></div>
-            <div class="soc-text"><span class="soc-name">LinkedIn</span><span class="soc-handle">linkedin.com/in/palakthakur</span></div>
-            <i class="fas fa-arrow-right" style="margin-left:auto;font-size:.7rem;color:var(--text-3)"></i>
+          <a href="https://linkedin.com/in/palakthakur2007" target="_blank" class="soc">
+            <div class="soc-ico soc-li">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </div>
+            <div class="soc-text"><span class="soc-name">LinkedIn</span><span class="soc-handle">linkedin.com/in/palakthakur2007</span></div>
+            <span class="soc-arr">↗</span>
           </a>
-          <a href="https://leetcode.com/palakthakur_2007" target="_blank" class="soc-link">
-            <div class="soc-icon lc"><i class="fas fa-code"></i></div>
-            <div class="soc-text"><span class="soc-name">LeetCode</span><span class="soc-handle">leetcode.com/palakthakur</span></div>
-            <i class="fas fa-arrow-right" style="margin-left:auto;font-size:.7rem;color:var(--text-3)"></i>
+          <a href="https://leetcode.com/palakthakur_2007" target="_blank" class="soc">
+            <div class="soc-ico soc-lc">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H19.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
+            </div>
+            <div class="soc-text"><span class="soc-name">LeetCode</span><span class="soc-handle">leetcode.com/palakthakur_2007</span></div>
+            <span class="soc-arr">↗</span>
+          </a>
+          <a href="mailto:palakthakur2212007@gmail.com" class="soc">
+            <div class="soc-ico soc-em">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+            </div>
+            <div class="soc-text"><span class="soc-name">Email</span><span class="soc-handle">palakthakur2212007@gmail.com</span></div>
+            <span class="soc-arr">↗</span>
           </a>
         </div>
       </div>
-      <div class="form-wrap rv2">
-        <div class="form-row">
-          <label>Your name</label>
-          <input type="text" id="fname" placeholder="Jane Smith"/>
-        </div>
-        <div class="form-row">
-          <label>Email address</label>
-          <input type="email" id="femail" placeholder="jane@example.com"/>
-        </div>
-        <div class="form-row">
-          <label>Message</label>
-          <textarea id="fmsg" rows="4" placeholder="Hi Palak, I'd love to…"></textarea>
-        </div>
-        <button class="form-submit" id="fsub">Send Message →</button>
+      <div class="form-card">
+        <div class="f-row"><label class="f-label">Your name</label><input class="f-input" id="fname" placeholder="Jane Smith" type="text"/></div>
+        <div class="f-row"><label class="f-label">Email address</label><input class="f-input" id="femail" placeholder="jane@example.com" type="email"/></div>
+        <div class="f-row"><label class="f-label">Message</label><textarea class="f-input" id="fmsg" rows="4" placeholder="Hi Palak, I'd love to…"></textarea></div>
+        <button class="f-btn" id="fsub">Send Message →</button>
       </div>
     </div>
   </div>
@@ -263,21 +183,18 @@
 <footer>
   <div class="footer-logo">Palak <span>Thakur</span></div>
   <div class="footer-sub">B.Tech EEE · AI/ML · BPIT Delhi · 2024–2028</div>
-  <div class="footer-links">
-    <a href="https://github.com/palakthakur07" target="_blank" title="GitHub">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+  <div class="footer-icons">
+    <a href="https://github.com/palakthakur07" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
     </a>
-    <a href="https://linkedin.com/in/palakthakur2007" target="_blank" title="LinkedIn">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    <a href="https://linkedin.com/in/palakthakur2007" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
     </a>
-    <a href="https://leetcode.com/palakthakur_2007" target="_blank" title="LeetCode">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H19.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
-    </a>
-    <a href="mailto:palakthakur2212007@gmail.com" title="Email">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+    <a href="mailto:palakthakur2212007@gmail.com">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
     </a>
   </div>
-  <div class="footer-copy">© 2024 Palak Thakur. Crafted with care.</div>
+  <div class="footer-copy">Designed and Built by Palak Thakur · © 2024</div>
 </footer>
 
 <script src="script.js"></script>
