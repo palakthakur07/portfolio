@@ -77,10 +77,6 @@ const SKILLS = [
     chips: ['React', 'TensorFlow', 'Node.js', 'NumPy', 'Pandas', 'Scikit-learn']
   },
   {
-    label: 'AI / ML',
-    chips: ['Machine Learning', 'Deep Learning', 'Computer Vision', 'Deepfake Detection', 'NLP']
-  },
-  {
     label: 'Tools & Platforms',
     chips: ['Git', 'GitHub', 'VS Code', 'Linux', 'Jupyter Notebook', 'Google Colab']
   },
@@ -97,25 +93,19 @@ const SKILLS = [
 const ACH = [
   {
     num: '01.',
-    icon: '🏆',
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.7 5.4L20 8.2l-4 4.1.9 5.7L12 15.8 7.1 18l.9-5.7-4-4.1 5.3-.8L12 2z"/></svg>`,
     title: 'Hackathon Participation',
     desc: 'Built and presented AI-focused projects in collaborative hackathon environments.'
   },
   {
     num: '02.',
-    icon: '💻',
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
     title: 'DSA & Coding Growth',
     desc: 'Strengthened problem-solving through consistent practice on competitive platforms.'
   },
   {
     num: '03.',
-    icon: '🧠',
-    title: 'AI / ML Exploration',
-    desc: 'Deep interest in machine learning, deepfake detection, and intelligent systems.'
-  },
-  {
-    num: '04.',
-    icon: '🌐',
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
     title: 'Portfolio & Web Builds',
     desc: 'Created responsive, modern web projects showcasing technical skills and design thinking.'
   }
@@ -335,6 +325,36 @@ function initAboutUpload() {
 }
 
 /* =====================
+   RESUME BUTTON
+===================== */
+function initResumeButton() {
+  const btn = document.getElementById('resumeBtn');
+  const input = document.getElementById('resumeInput');
+  if (!btn || !input) return;
+
+  let resumeUrl = '';
+
+  btn.addEventListener('click', () => {
+    if (resumeUrl) {
+      window.open(resumeUrl, '_blank', 'noopener,noreferrer');
+      return;
+    }
+    input.click();
+  });
+
+  input.addEventListener('change', e => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (resumeUrl) URL.revokeObjectURL(resumeUrl);
+    resumeUrl = URL.createObjectURL(file);
+    btn.setAttribute('data-resume-url', resumeUrl);
+    btn.title = 'Open uploaded resume';
+    window.open(resumeUrl, '_blank', 'noopener,noreferrer');
+  });
+}
+
+/* =====================
    NAV ACTIVE + MOBILE
 ===================== */
 function initNav() {
@@ -394,6 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
   buildSkills();
   buildAchievements();
   initAboutUpload();
+  initResumeButton();
   initNav();
   initForm();
 });
