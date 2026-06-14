@@ -76,7 +76,7 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 }
 .hero-eyebrow span{color:var(--pink)}
 .hero-name{
-  font-family:var(--syne);font-size:clamp(3.2rem,7vw,5.8rem);
+  font-family:var(--syne);font-size:clamp(2.4rem,5vw,4rem);
   font-weight:800;line-height:1;letter-spacing:-.04em;
   color:var(--text);margin-bottom:1.4rem;
 }
@@ -119,14 +119,19 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 }
 .marquee-track:hover{animation-play-state:paused}
 .marquee-item{
-  display:flex;align-items:center;gap:.5rem;
-  padding:0 1.6rem;font-family:var(--mono);font-size:.72rem;
-  color:var(--text3);white-space:nowrap;
+  display:flex;align-items:center;gap:.6rem;
+  padding:0 2rem;font-family:var(--mono);font-size:.72rem;
+  color:rgba(255,255,255,0.5);white-space:nowrap;
   border-right:1px solid var(--border);
+  transition:color .2s;
 }
 .marquee-item:last-child{border-right:none}
-.mdot{width:5px;height:5px;border-radius:50%;background:var(--pink);opacity:.6;flex-shrink:0}
+.marquee-item:hover{color:rgba(255,255,255,0.9)}
+.marquee-item svg{flex-shrink:0;opacity:.7;transition:opacity .2s}
+.marquee-item:hover svg{opacity:1}
+.marquee-name{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em}
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
 
 /* SCROLL HINT */
 .scroll-hint{
@@ -221,7 +226,7 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
   display:grid;grid-template-columns:200px 1fr;
   gap:3rem;align-items:start;
 }
-.exp-nav{display:flex;flex-direction:column}
+.exp-nav{display:flex;flex-direction:column;position:sticky;top:80px;align-self:start}
 .nav-item{
   display:flex;align-items:flex-start;gap:.8rem;
   padding:1rem 0;border-bottom:1px solid var(--border);
