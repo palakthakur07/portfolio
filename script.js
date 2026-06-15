@@ -237,9 +237,9 @@ function buildProjects() {
             <circle cx="8.5" cy="8.5" r="1.5"/>
             <path d="M21 15l-5-5L5 21"/>
           </svg>
-          <span>click + to add<br>project screenshot</span>
+          <span id="imgtext${i}">Click to add<br>project screenshot</span>
         </div>
-        <button class="proj-upload-btn" onclick="document.getElementById('imgfile${i}').click()">+</button>
+        <button class="proj-upload-btn" id="projbtn${i}" type="button">+</button>
       </div>
       <div class="proj-content">
         <div class="proj-num">${p.num}</div>
@@ -253,15 +253,43 @@ function buildProjects() {
       </div>`;
     list.appendChild(card);
 
-    document.getElementById(`imgfile${i}`).addEventListener('change', e => {
+    const input = document.getElementById(`imgfile${i}`);
+    const button = document.getElementById(`projbtn${i}`);
+    const img = document.getElementById(`imgprev${i}`);
+    const placeholder = document.getElementById(`imgph${i}`);
+    const text = document.getElementById(`imgtext${i}`);
+
+    const saveKey = `portfolio-project-image-${i}`;
+    const saved = localStorage.getItem(saveKey);
+    if (saved) {
+      img.src = saved;
+      img.style.display = 'block';
+      if (placeholder) placeholder.style.display = 'none';
+      if (text) text.textContent = 'Project image fixed';
+      if (button) button.style.display = 'none';
+      input.disabled = true;
+    }
+
+    button?.addEventListener('click', () => {
+      if (input.disabled) return;
+      input.click();
+    });
+
+    input?.addEventListener('change', e => {
       const f = e.target.files?.[0];
       if (!f) return;
       const r = new FileReader();
       r.onload = ev => {
-        const img = document.getElementById(`imgprev${i}`);
-        img.src = ev.target.result;
-        img.style.display = 'block';
-        document.getElementById(`imgph${i}`).style.display = 'none';
+        const dataUrl = ev.target.result;
+        if (typeof dataUrl === 'string') {
+          localStorage.setItem(saveKey, dataUrl);
+          img.src = dataUrl;
+          img.style.display = 'block';
+          if (placeholder) placeholder.style.display = 'none';
+          if (text) text.textContent = 'Project image fixed';
+          if (button) button.style.display = 'none';
+          input.disabled = true;
+        }
       };
       r.readAsDataURL(f);
     });
@@ -308,17 +336,48 @@ function buildAchievements() {
 ===================== */
 function initAboutUpload() {
   const input = document.getElementById('aboutInput');
-  if (!input) return;
+  const frame = document.getElementById('aboutFrame');
+  const img = document.getElementById('aboutImg');
+  const ph = document.getElementById('aboutPlaceholder');
+  const text = document.getElementById('aboutUploadText');
+  if (!input || !frame || !img) return;
+
+  const STORAGE_KEY = 'portfolio-about-photo';
+
+  const showImage = (dataUrl) => {
+    img.src = dataUrl;
+    img.style.display = 'block';
+    if (ph) ph.style.display = 'none';
+    if (text) text.textContent = 'Photo fixed';
+    frame.title = 'Uploaded photo';
+    frame.style.cursor = 'default';
+    input.disabled = true;
+  };
+
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    showImage(saved);
+  }
+
+  frame.addEventListener('click', e => {
+    if (!input.disabled) {
+      input.click();
+    } else {
+      e.preventDefault();
+    }
+  });
+
   input.addEventListener('change', e => {
     const f = e.target.files?.[0];
     if (!f) return;
+
     const r = new FileReader();
     r.onload = ev => {
-      const img = document.getElementById('aboutImg');
-      img.src = ev.target.result;
-      img.style.display = 'block';
-      const ph = document.getElementById('aboutPlaceholder');
-      if (ph) ph.style.display = 'none';
+      const dataUrl = ev.target.result;
+      if (typeof dataUrl === 'string') {
+        localStorage.setItem(STORAGE_KEY, dataUrl);
+        showImage(dataUrl);
+      }
     };
     r.readAsDataURL(f);
   });
