@@ -64,20 +64,10 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
    HERO
 ===================== */
 #home{
-  min-height:calc(100vh - 54px);display:flex;flex-direction:column;
+  min-height:100vh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  padding:54px 2rem 1rem;position:relative;overflow:hidden;
+  padding:54px 2rem 0;position:relative;overflow:hidden;
   text-align:center;
-}
-#home::after{
-  content:'';
-  width:160px;
-  height:1px;
-  background:rgba(255,255,255,0.08);
-  position:absolute;
-  left:50%;
-  bottom:0;
-  transform:translateX(-50%);
 }
 .hero-inner{display:flex;flex-direction:column;align-items:center;width:100%}
 .hero-eyebrow{
@@ -125,28 +115,46 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 .marquee-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
 .marquee-track{
   display:flex;width:max-content;
-  animation:marquee 25s linear infinite;
+  animation:marquee 30s linear infinite;
+  will-change:transform;
 }
 .marquee-track:hover{animation-play-state:paused}
 .marquee-item{
   display:flex;align-items:center;gap:.6rem;
-  padding:0 1rem;font-family:var(--mono);font-size:.72rem;
-  color:#f7f7f7;white-space:nowrap;
+  padding:0 2.4rem;font-family:var(--mono);font-size:.72rem;
+  color:rgba(255,255,255,0.5);white-space:nowrap;
+  border-right:1px solid var(--border);
   transition:color .2s;
 }
-.marquee-item:hover{color:#ffffff}
-.marquee-item svg{flex-shrink:0;opacity:1;transition:opacity .2s}
+.marquee-item:last-child{border-right:1px solid var(--border)}
+.marquee-item:hover{color:rgba(255,255,255,0.9)}
+.marquee-item svg{flex-shrink:0;opacity:.7;transition:opacity .2s}
 .marquee-item:hover svg{opacity:1}
 .marquee-name{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em}
-@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes marquee{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-25%)}
+}
 
 
-
+/* SCROLL HINT */
+.scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;opacity:.3;
+}
+.scroll-hint span{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);font-family:var(--mono)}
+.scroll-line{width:1px;height:32px;background:var(--border2);position:relative;overflow:hidden;border-radius:1px}
+.scroll-line::after{
+  content:'';position:absolute;top:-100%;left:0;
+  width:100%;height:100%;background:var(--pink);
+  animation:scrolldown 1.6s ease infinite;
+}
+@keyframes scrolldown{0%{top:-100%}100%{top:100%}}
 
 /* =====================
    SECTIONS
 ===================== */
-.sec{padding:4.5rem 3rem 5rem}
+.sec{padding:7rem 3rem}
 .sec-alt{background:var(--bg2)}
 .sec-inner{max-width:1100px;margin:0 auto}
 .sec-label{
@@ -179,9 +187,8 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
   justify-content:center;margin:0 auto;
 }
 .about-img-frame img{
-  width:100%;height:100%;object-fit:contain;
+  width:100%;height:100%;object-fit:cover;
   position:absolute;inset:0;display:none;
-  background:#0a0a0a;
 }
 .about-img-placeholder{
   display:flex;flex-direction:column;align-items:center;
@@ -215,13 +222,6 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
   display:flex;align-items:center;gap:.7rem;
   font-family:var(--mono);font-size:.72rem;color:var(--text3);
 }
-.info-chip .ic-dot{
-  width:28px;height:28px;border-radius:6px;
-  display:inline-flex;align-items:center;justify-content:center;
-  background:rgba(255,255,255,0.04);border:1px solid var(--border);
-  color:var(--text3);flex-shrink:0;
-}
-.info-chip .ic-dot svg{width:13px;height:13px}
 
 /* =====================
    EXPERIENCE
@@ -263,14 +263,8 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
   padding:.28rem .85rem;border-radius:999px;margin-bottom:1rem;
   text-transform:uppercase;
 }
-.card-title-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.3rem}
-.card-icon{
-  width:30px;height:30px;border-radius:6px;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(255,255,255,0.04);border:1px solid var(--border);
-  color:var(--text3);flex-shrink:0;
-}
-.card-icon svg{width:14px;height:14px}
+.card-title-row{display:flex;align-items:center;gap:.6rem;margin-bottom:.3rem}
+.card-icon{font-size:1rem}
 .card-title{font-family:var(--syne);font-size:1rem;font-weight:600;color:var(--text);letter-spacing:-.01em}
 .card-org{font-size:.8rem;color:var(--text3);margin-bottom:.9rem;font-family:var(--mono)}
 .card-desc{font-size:.85rem;color:var(--text2);line-height:1.85;font-weight:300;margin-bottom:1.2rem}
@@ -291,19 +285,18 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
   border-radius:var(--radius-lg);overflow:hidden;
 }
 .proj-card{
-  display:grid;grid-template-columns:340px 1fr;
+  display:grid;grid-template-columns:280px 1fr;
   background:var(--card);transition:background .2s;cursor:default;
 }
 .proj-card:hover{background:#131313}
 .proj-img-wrap{
   position:relative;background:var(--bg3);
   border-right:1px solid var(--border);overflow:hidden;
-  min-height:260px;display:block;
+  min-height:210px;display:flex;align-items:center;justify-content:center;
 }
 .proj-img-wrap img{
   width:100%;height:100%;object-fit:cover;
   display:none;position:absolute;inset:0;
-  background:#0a0a0a;
 }
 .proj-img-placeholder{
   display:flex;flex-direction:column;align-items:center;
@@ -368,14 +361,13 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
    ACHIEVEMENTS
 ===================== */
 .ach-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  display:grid;grid-template-columns:repeat(4,1fr);
   gap:1px;background:var(--border);
   border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;
 }
 .ach-card{
-  display:flex;flex-direction:column;align-items:flex-start;
   background:var(--card);padding:1.8rem 1.5rem;
-  transition:background .2s;min-height:100%;
+  transition:background .2s;
 }
 .ach-card:hover{background:var(--bg3)}
 .ach-num{font-family:var(--mono);font-size:.62rem;color:var(--text3);margin-bottom:1rem}
