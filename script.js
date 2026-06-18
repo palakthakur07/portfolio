@@ -459,8 +459,7 @@ function initForm() {
       document.getElementById('fname').value = '';
       document.getElementById('femail').value = '';
       document.getElementById('fmsg').value = '';
-    }, 5000); //chnges 3000 to 5000
-  });
+    }, 3000);
 }
 
 /* =====================
