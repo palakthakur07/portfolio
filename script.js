@@ -442,17 +442,21 @@ function initNav() {
 function initForm() {
   const btn = document.getElementById('fsub');
   if (!btn) return;
+
   btn.addEventListener('click', function () {
     const name = document.getElementById('fname').value.trim();
     const email = document.getElementById('femail').value.trim();
     const msg = document.getElementById('fmsg').value.trim();
+
     if (!name || !email || !msg) {
       btn.textContent = 'Please fill all fields';
       setTimeout(() => btn.textContent = 'Send Message →', 2000);
       return;
     }
+
     btn.textContent = 'Message sent ✓';
     btn.style.background = '#12a05c';
+
     setTimeout(() => {
       btn.textContent = 'Send Message →';
       btn.style.background = '';
@@ -460,6 +464,7 @@ function initForm() {
       document.getElementById('femail').value = '';
       document.getElementById('fmsg').value = '';
     }, 3000);
+  });
 }
 
 /* =====================
