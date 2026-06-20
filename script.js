@@ -43,27 +43,44 @@ const EXP = [
   }
 ];
 
+/*
+  HOW LIVE PREVIEWS WORK
+  -----------------------
+  Add a "live" property with the deployed URL to any project below
+  to replace its screenshot box with a real, interactive mini
+  version of the website (loaded in an iframe).
+
+  - If "live" is set        -> shows the working mini-site preview.
+  - If "live" is left empty -> falls back to the click-to-upload
+                                screenshot box, exactly as before.
+
+  Example:
+    live: 'https://yourusername.github.io/roadsos/'
+*/
 const PROJ = [
   {
     num: '01.',
     title: 'RoadSOS',
     desc: 'A road assistance platform helping users during emergencies with quick access to support services through a simple, responsive interface.',
     stack: ['HTML', 'CSS', 'JavaScript'],
-    gh: 'https://github.com/palakthakur07'
+    gh: 'https://github.com/palakthakur07',
+    live: '' // e.g. 'https://palakthakur07.github.io/roadsos/'
   },
   {
     num: '02.',
     title: 'CodeHer Elite',
     desc: 'A hackathon project focused on deepfake detection. Uses AI-based analysis to help identify potentially manipulated media with an accessible upload interface.',
     stack: ['HTML', 'CSS', 'JavaScript'],
-    gh: 'https://github.com/palakthakur07'
+    gh: 'https://github.com/palakthakur07',
+    live: '' // e.g. 'https://palakthakur07.github.io/codeher-elite/'
   },
   {
     num: '03.',
     title: 'Personal Portfolio',
     desc: 'A responsive portfolio website showcasing projects, technical skills, and my learning journey as an EEE student interested in software development.',
     stack: ['HTML', 'CSS', 'JavaScript'],
-    gh: 'https://github.com/palakthakur07'
+    gh: 'https://github.com/palakthakur07',
+    live: '' // e.g. 'https://palakthakur07.github.io/portfolio/'
   }
 ];
 
@@ -138,7 +155,7 @@ const TECHS = [
   },
   {
     name: 'C++',
-    svg: `<svg width="22" height="22" viewBox="0 0 256 288" xmlns="http://www.w3.org/2000/svg"><path d="M255.569 84.72c-.002-4.83-1.035-9.098-3.124-12.761-2.052-3.602-5.125-6.621-9.247-9.008-34.025-19.619-68.083-39.178-102.097-58.817-9.17-5.294-18.061-5.101-27.163.269C100.585 14.842 32.673 54.202 10.37 67.036 3.bootstrap39 71.22.005 77.476 0 85.91c-.023 39.369 0 78.738 0 118.107 0 4.94 1.076 9.28 3.237 12.979 2.207 3.768 5.501 6.845 9.991 9.31 22.303 12.834 90.216 52.194 103.271 59.765 9.055 5.299 17.936 5.107 26.962-.243 34.002-19.605 68.009-39.178 102.014-58.814 4.49-2.465 7.784-5.543 9.991-9.31 2.159-3.698 3.237-8.04 3.237-12.979 0 0 0-78.738-.134-118.105z" fill="#fff" fill-opacity=".1"/><path d="M128.182 143.509L4.932 214.877c2.207 3.768 5.501 6.845 9.991 9.31 22.303 12.834 90.216 52.194 103.271 59.765 9.055 5.299 17.936 5.107 26.962-.243 34.002-19.605 68.009-39.178 102.014-58.814 4.49-2.465 7.784-5.543 9.991-9.31L128.182 143.509z" fill="#fff" fill-opacity=".1"/><path d="M91.101 164.5c9.76 16.894 27.888 28.275 48.682 28.275 20.796 0 38.925-11.381 48.685-28.275H91.101zm97.367-41c-9.76-16.894-27.889-28.275-48.685-28.275-20.794 0-38.922 11.381-48.682 28.275h97.367z" fill="#fff" fill-opacity=".85"/><path d="M192.5 143.5h8v-8h6v8h8v6h-8v8h-6v-8h-8v-6zm-24 0h8v-8h6v8h8v6h-8v8h-6v-8h-8v-6z" fill="#fff" fill-opacity=".85"/></svg>`
+    svg: `<svg width="22" height="22" viewBox="0 0 256 288" xmlns="http://www.w3.org/2000/svg"><path d="M255.569 84.72c-.002-4.83-1.035-9.098-3.124-12.761-2.052-3.602-5.125-6.621-9.247-9.008-34.025-19.619-68.083-39.178-102.097-58.817-9.17-5.294-18.061-5.101-27.163.269C100.585 14.842 32.673 54.202 10.37 67.036 3.39 71.22.005 77.476 0 85.91c-.023 39.369 0 78.738 0 118.107 0 4.94 1.076 9.28 3.237 12.979 2.207 3.768 5.501 6.845 9.991 9.31 22.303 12.834 90.216 52.194 103.271 59.765 9.055 5.299 17.936 5.107 26.962-.243 34.002-19.605 68.009-39.178 102.014-58.814 4.49-2.465 7.784-5.543 9.991-9.31 2.159-3.698 3.237-8.04 3.237-12.979 0 0 0-78.738-.134-118.105z" fill="#fff" fill-opacity=".1"/><path d="M128.182 143.509L4.932 214.877c2.207 3.768 5.501 6.845 9.991 9.31 22.303 12.834 90.216 52.194 103.271 59.765 9.055 5.299 17.936 5.107 26.962-.243 34.002-19.605 68.009-39.178 102.014-58.814 4.49-2.465 7.784-5.543 9.991-9.31L128.182 143.509z" fill="#fff" fill-opacity=".1"/><path d="M91.101 164.5c9.76 16.894 27.888 28.275 48.682 28.275 20.796 0 38.925-11.381 48.685-28.275H91.101zm97.367-41c-9.76-16.894-27.889-28.275-48.685-28.275-20.794 0-38.922 11.381-48.682 28.275h97.367z" fill="#fff" fill-opacity=".85"/><path d="M192.5 143.5h8v-8h6v8h8v6h-8v8h-6v-8h-8v-6zm-24 0h8v-8h6v8h8v6h-8v8h-6v-8h-8v-6z" fill="#fff" fill-opacity=".85"/></svg>`
   },
   {
     name: 'HTML5',
@@ -225,22 +242,53 @@ function buildProjects() {
   if (!list) return;
 
   PROJ.forEach((p, i) => {
+    const hasLive = !!(p.live && p.live.trim());
     const card = document.createElement('div');
     card.className = 'proj-card';
+
+    const previewHTML = hasLive
+      ? `
+        <div class="proj-live-wrap" id="livewrap${i}">
+          <div class="mini-browser">
+            <div class="mini-browser-bar">
+              <span class="mini-dot mini-dot-r"></span>
+              <span class="mini-dot mini-dot-y"></span>
+              <span class="mini-dot mini-dot-g"></span>
+              <span class="mini-browser-url">${formatUrl(p.live)}</span>
+            </div>
+            <div class="mini-browser-screen">
+              <iframe
+                src="${p.live}"
+                loading="lazy"
+                title="${p.title} live preview"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                referrerpolicy="no-referrer">
+              </iframe>
+              <div class="mini-live-overlay" id="liveoverlay${i}">
+                <span class="mini-live-pill">
+                  <span class="mini-live-dot"></span> Live preview — click to interact
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>`
+      : `
+        <div class="proj-img-wrap" id="imgwrap${i}">
+          <input type="file" accept="image/*" id="imgfile${i}" style="display:none">
+          <img id="imgprev${i}" alt="${p.title} screenshot">
+          <div class="proj-img-placeholder" id="imgph${i}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <path d="M21 15l-5-5L5 21"/>
+            </svg>
+            <span id="imgtext${i}">Click to add<br>project screenshot</span>
+          </div>
+          <button class="proj-upload-btn" id="projbtn${i}" type="button">+</button>
+        </div>`;
+
     card.innerHTML = `
-      <div class="proj-img-wrap" id="imgwrap${i}">
-        <input type="file" accept="image/*" id="imgfile${i}" style="display:none">
-        <img id="imgprev${i}" alt="${p.title} screenshot">
-        <div class="proj-img-placeholder" id="imgph${i}">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-            <rect x="3" y="3" width="18" height="18" rx="2"/>
-            <circle cx="8.5" cy="8.5" r="1.5"/>
-            <path d="M21 15l-5-5L5 21"/>
-          </svg>
-          <span id="imgtext${i}">Click to add<br>project screenshot</span>
-        </div>
-        <button class="proj-upload-btn" id="projbtn${i}" type="button">+</button>
-      </div>
+      ${previewHTML}
       <div class="proj-content">
         <div class="proj-num">${p.num}</div>
         <div class="proj-title">${p.title}</div>
@@ -252,6 +300,23 @@ function buildProjects() {
         </div>
       </div>`;
     list.appendChild(card);
+
+    if (hasLive) {
+      // Click the overlay once to "unlock" scroll/click inside the iframe.
+      const overlay = document.getElementById(`liveoverlay${i}`);
+      const wrap = document.getElementById(`livewrap${i}`);
+      overlay?.addEventListener('click', () => {
+        wrap.classList.add('is-active');
+        overlay.style.display = 'none';
+      });
+      // Re-lock when the mouse leaves, so normal page scrolling
+      // isn't accidentally captured by the embedded site.
+      wrap?.addEventListener('mouseleave', () => {
+        wrap.classList.remove('is-active');
+        if (overlay) overlay.style.display = 'flex';
+      });
+      return;
+    }
 
     const input = document.getElementById(`imgfile${i}`);
     const button = document.getElementById(`projbtn${i}`);
@@ -294,6 +359,15 @@ function buildProjects() {
       r.readAsDataURL(f);
     });
   });
+}
+
+function formatUrl(url) {
+  try {
+    const u = new URL(url);
+    return u.hostname.replace(/^www\./, '') + (u.pathname !== '/' ? u.pathname : '');
+  } catch {
+    return url;
+  }
 }
 
 /* =====================
