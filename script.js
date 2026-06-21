@@ -63,24 +63,16 @@ const PROJ = [
     title: 'RoadSOS',
     desc: 'A road assistance platform helping users during emergencies with quick access to support services through a simple, responsive interface.',
     stack: ['HTML', 'CSS', 'JavaScript'],
-    gh: 'https://github.com/palakthakur07',
-    live: '' // e.g. 'https://palakthakur07.github.io/roadsos/'
+    gh: 'https://github.com/palakthakur07/RoadSOS',
+    live: 'https://road-sos-taupe.vercel.app/'
   },
   {
     num: '02.',
     title: 'CodeHer Elite',
     desc: 'A hackathon project focused on deepfake detection. Uses AI-based analysis to help identify potentially manipulated media with an accessible upload interface.',
     stack: ['HTML', 'CSS', 'JavaScript'],
-    gh: 'https://github.com/palakthakur07',
-    live: '' // e.g. 'https://palakthakur07.github.io/codeher-elite/'
-  },
-  {
-    num: '03.',
-    title: 'Personal Portfolio',
-    desc: 'A responsive portfolio website showcasing projects, technical skills, and my learning journey as an EEE student interested in software development.',
-    stack: ['HTML', 'CSS', 'JavaScript'],
-    gh: 'https://github.com/palakthakur07',
-    live: '' // e.g. 'https://palakthakur07.github.io/portfolio/'
+    gh: 'https://github.com/palakthakur07/CodeHer',
+    live: 'https://code-her.vercel.app/'
   }
 ];
 
@@ -220,7 +212,8 @@ function buildExperience() {
 
     // Card
     const card = document.createElement('div');
-    card.className = 'exp-card' + (i === 0 ? ' active' : '');
+    card.className = 'exp-card reveal-up' + (i === 0 ? ' active' : '');
+    card.style.setProperty('--d', `${i * 0.08}s`);
     card.innerHTML = `
       <div class="date-pill">${e.year}</div>
       <div class="card-title-row">
@@ -244,7 +237,8 @@ function buildProjects() {
   PROJ.forEach((p, i) => {
     const hasLive = !!(p.live && p.live.trim());
     const card = document.createElement('div');
-    card.className = 'proj-card';
+    card.className = 'proj-card reveal-up';
+    card.style.setProperty('--d', `${i * 0.1}s`);
 
     const previewHTML = hasLive
       ? `
@@ -379,9 +373,12 @@ function buildSkills() {
 
   SKILLS.forEach(cat => {
     const div = document.createElement('div');
+    const chipsHTML = cat.chips
+      .map((c, idx) => `<span class="chip" style="--i:${idx}">${c}</span>`)
+      .join('');
     div.innerHTML = `
       <div class="cat-label">${cat.label}</div>
-      <div class="chips">${cat.chips.map(c => `<span class="chip">${c}</span>`).join('')}</div>`;
+      <div class="chips">${chipsHTML}</div>`;
     container.appendChild(div);
   });
 }
@@ -393,9 +390,10 @@ function buildAchievements() {
   const grid = document.getElementById('achGrid');
   if (!grid) return;
 
-  ACH.forEach(a => {
+  ACH.forEach((a, i) => {
     const card = document.createElement('div');
-    card.className = 'ach-card';
+    card.className = 'ach-card reveal-up';
+    card.style.setProperty('--d', `${i * 0.1}s`);
     card.innerHTML = `
       <div class="ach-num">${a.num}</div>
       <div class="ach-icon-wrap">${a.icon}</div>
@@ -542,6 +540,100 @@ function initForm() {
 }
 
 /* =====================
+   CURSOR GLOW
+===================== */
+function initCursorGlow() {
+  const glow = document.getElementById('cursorGlow');
+  if (!glow) return;
+  if (window.matchMedia('(hover:none)').matches) return;
+
+  let raf = null;
+  window.addEventListener('mousemove', e => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%,-50%)`;
+      glow.classList.add('is-active');
+      raf = null;
+    });
+  }, { passive: true });
+
+  document.addEventListener('mouseleave', () => glow.classList.remove('is-active'));
+}
+
+/* =====================
+   SCROLL REVEAL (IntersectionObserver)
+===================== */
+function initScrollReveal() {
+  const targets = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+  if (!targets.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach(t => t.classList.add('in-view'));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  targets.forEach(t => io.observe(t));
+}
+
+/* =====================
+   SKILL CHIPS POP-IN ON VIEW
+===================== */
+function initChipReveal() {
+  const cats = document.getElementById('skillsCats');
+  if (!cats || !('IntersectionObserver' in window)) {
+    document.querySelectorAll('.chip').forEach(c => c.classList.add('pop-in'));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.chip').forEach(c => c.classList.add('pop-in'));
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.skills-cats > div').forEach(group => io.observe(group));
+}
+
+/* =====================
+   PROJECT CARD TILT + GLOW
+===================== */
+function initProjectTilt() {
+  if (window.matchMedia('(hover:none)').matches) return;
+
+  document.querySelectorAll('.proj-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const px = (x / rect.width) * 100;
+      const py = (y / rect.height) * 100;
+      card.style.setProperty('--mx', `${px}%`);
+      card.style.setProperty('--my', `${py}%`);
+
+      const rx = ((y / rect.height) - 0.5) * -4;
+      const ry = ((x / rect.width) - 0.5) * 4;
+      card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-3px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) translateY(0)';
+    });
+  });
+}
+
+/* =====================
    INIT
 ===================== */
 document.addEventListener('DOMContentLoaded', () => {
@@ -554,4 +646,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initResumeButton();
   initNav();
   initForm();
+  initCursorGlow();
+  initScrollReveal();
+  initChipReveal();
+  initProjectTilt();
 });

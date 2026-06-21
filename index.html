@@ -9,6 +9,9 @@
 </head>
 <body>
 
+<!-- CURSOR GLOW -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
 <!-- NAV -->
 <nav id="nav">
   <a href="#home" class="nav-logo">Palak <span>Thakur</span></a>
@@ -28,11 +31,12 @@
 
 <!-- HERO -->
 <section id="home">
+  <div class="hero-bg-glow"></div>
   <div class="hero-inner">
-    <div class="hero-eyebrow">Welcome to the portfolio of <span>Palak Thakur</span></div>
-    <h1 class="hero-name">Palak <span>Thakur</span></h1>
-    <p class="hero-desc">B.Tech Electrical &amp; Electronics Engineering student at BPIT Delhi, building at the intersection of circuits, code, and artificial intelligence.</p>
-    <div class="hero-btns">
+    <div class="hero-eyebrow reveal-up" style="--d:0s">Welcome to the portfolio of <span>Palak Thakur</span></div>
+    <h1 class="hero-name reveal-up" style="--d:.1s">Palak <span>Thakur</span></h1>
+    <p class="hero-desc reveal-up" style="--d:.2s">B.Tech Electrical &amp; Electronics Engineering student at BPIT Delhi, building at the intersection of circuits, code, and artificial intelligence.</p>
+    <div class="hero-btns reveal-up" style="--d:.3s">
       <a href="#contact" class="btn btn-primary">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         Contact Me
@@ -47,7 +51,7 @@
         Resume
       </button>
     </div>
-    <div class="marquee-wrap">
+    <div class="marquee-wrap reveal-up" style="--d:.4s">
       <div class="marquee-track" id="marquee"></div>
     </div>
   </div>
@@ -57,7 +61,7 @@
 <section id="about" class="sec">
   <div class="sec-inner">
     <div class="about-grid">
-      <div class="about-img-col">
+      <div class="about-img-col reveal-left">
         <label class="about-img-frame" id="aboutFrame" for="aboutInput" title="Click to upload photo">
           <input type="file" accept="image/*" id="aboutInput"/>
           <img id="aboutImg" alt="Palak Thakur"/>
@@ -67,7 +71,7 @@
           </div>
         </label>
       </div>
-      <div class="about-text-col">
+      <div class="about-text-col reveal-right">
         <div class="sec-label">About Me</div>
         <h2 class="sec-title">Engineering meets<br><span>intelligence.</span></h2>
         <p>I'm <strong>Palak Thakur</strong>, a second-year B.Tech student in <strong>Electrical &amp; Electronics Engineering</strong> at Bhagwan Parshuram Institute of Technology, Delhi, with a strong interest in software development and emerging technologies.</p>
@@ -86,9 +90,9 @@
 <!-- EXPERIENCE -->
 <section id="experience" class="sec sec-alt">
   <div class="sec-inner">
-    <div class="sec-label">Timeline</div>
-    <h2 class="sec-title">My <span>Journey</span></h2>
-    <p class="sec-subdesc">The positions and milestones in my career so far</p>
+    <div class="sec-label reveal-up">Timeline</div>
+    <h2 class="sec-title reveal-up">My <span>Journey</span></h2>
+    <p class="sec-subdesc reveal-up">The positions and milestones in my career so far</p>
     <div class="exp-wrap">
       <div class="exp-nav" id="expNav"></div>
       <div class="exp-cards" id="expCards"></div>
@@ -99,9 +103,9 @@
 <!-- PROJECTS -->
 <section id="projects" class="sec">
   <div class="sec-inner">
-    <div class="sec-label">Work</div>
-    <h2 class="sec-title">Featured <span>Projects</span></h2>
-    <p class="sec-subdesc">Here are some of the most recent projects I have been working on</p>
+    <div class="sec-label reveal-up">Work</div>
+    <h2 class="sec-title reveal-up">Featured <span>Projects</span></h2>
+    <p class="sec-subdesc reveal-up">Here are some of the most recent projects I have been working on</p>
     <div class="proj-list" id="projList"></div>
   </div>
 </section>
@@ -109,9 +113,9 @@
 <!-- SKILLS -->
 <section id="skills" class="sec sec-alt">
   <div class="sec-inner">
-    <div class="sec-label">Expertise</div>
-    <h2 class="sec-title">Technical <span>Skills</span></h2>
-    <p class="sec-subdesc">Languages, frameworks, tools, and platforms I work with.</p>
+    <div class="sec-label reveal-up">Expertise</div>
+    <h2 class="sec-title reveal-up">Technical <span>Skills</span></h2>
+    <p class="sec-subdesc reveal-up">Languages, frameworks, tools, and platforms I work with.</p>
     <div class="skills-cats" id="skillsCats"></div>
   </div>
 </section>
@@ -119,9 +123,9 @@
 <!-- ACHIEVEMENTS -->
 <section id="achievements" class="sec">
   <div class="sec-inner">
-    <div class="sec-label">Achievements</div>
-    <h2 class="sec-title">Milestones &amp; <span>Recognitions</span></h2>
-    <p class="sec-subdesc">A quick snapshot of competitions, learning milestones, and technical wins.</p>
+    <div class="sec-label reveal-up">Achievements</div>
+    <h2 class="sec-title reveal-up">Milestones &amp; <span>Recognitions</span></h2>
+    <p class="sec-subdesc reveal-up">A quick snapshot of competitions, learning milestones, and technical wins.</p>
     <div class="ach-grid" id="achGrid"></div>
   </div>
 </section>
@@ -129,9 +133,9 @@
 <!-- CONTACT -->
 <section id="contact" class="sec sec-alt">
   <div class="sec-inner">
-    <div class="sec-label">Contact</div>
     <div class="contact-grid">
-      <div class="contact-left">
+      <div class="contact-left reveal-left">
+        <div class="sec-label">Contact</div>
         <h2 class="contact-title">Let's build<br><span>something great.</span></h2>
         <p class="contact-sub">Whether you want to collaborate on a project, discuss AI/ML, or just say hello — my inbox is always open.</p>
         <div class="social-links">
@@ -165,7 +169,7 @@
           </a>
         </div>
       </div>
-      <div class="form-card">
+      <div class="form-card reveal-right">
         <div class="f-row"><label class="f-label">Your name</label><input class="f-input" id="fname" placeholder="Jane Smith" type="text"/></div>
         <div class="f-row"><label class="f-label">Email address</label><input class="f-input" id="femail" placeholder="jane@example.com" type="email"/></div>
         <div class="f-row"><label class="f-label">Message</label><textarea class="f-input" id="fmsg" rows="4" placeholder="Hi Palak, I'd love to…"></textarea></div>
