@@ -68,7 +68,7 @@ const PROJ = [
   },
   {
     num: '02.',
-    title: 'CodeHer Elite',
+    title: 'Deepfake Detection Platform',
     desc: 'A hackathon project focused on deepfake detection. Uses AI-based analysis to help identify potentially manipulated media with an accessible upload interface.',
     stack: ['HTML', 'CSS', 'JavaScript'],
     gh: 'https://github.com/palakthakur07/CodeHer',
@@ -117,6 +117,18 @@ const ACH = [
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
     title: 'Portfolio & Web Builds',
     desc: 'Created responsive, modern web projects showcasing technical skills and design thinking.'
+  },
+  {
+    num: '04.',
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2a9 9 0 1 0 7.5 14.5L21 19"/><path d="M11 6a5 5 0 1 1 0 10"/></svg>`,
+    title: 'Most Innovative Project — Elite Her',
+    desc: 'Won Most Innovative Project at the Elite Her Hackathon for building a Deepfake Detection Platform using the Sightengine API for AI-based analysis, with an accessible upload interface.'
+  },
+  {
+    num: '05.',
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>`,
+    title: '3rd Position — BIZMARK',
+    desc: 'Placed 3rd in BIZMARK, a marketing case-competition by DTU Consulting Group, applying structured, data-driven problem-solving under a tight time constraint.'
   }
 ];
 
@@ -491,6 +503,8 @@ function initResumeButton() {
 function initNav() {
   const ham = document.getElementById('ham');
   const menu = document.getElementById('navmenu');
+  const pill = document.getElementById('navPill');
+
   if (ham && menu) {
     ham.addEventListener('click', () => menu.classList.toggle('open'));
     menu.querySelectorAll('a').forEach(a => {
@@ -498,14 +512,52 @@ function initNav() {
     });
   }
 
+  function movePillTo(link) {
+    if (!pill || !link) return;
+    const menuRect = menu.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    pill.style.left = `${linkRect.left - menuRect.left}px`;
+    pill.style.width = `${linkRect.width}px`;
+    pill.classList.add('is-visible');
+  }
+
   const sections = document.querySelectorAll('section[id]');
-  window.addEventListener('scroll', () => {
+  function updateActiveLink() {
     let cur = '';
     sections.forEach(s => { if (scrollY >= s.offsetTop - 80) cur = s.id; });
-    document.querySelectorAll('.nav-links a').forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+    const links = document.querySelectorAll('.nav-links a');
+    let activeLink = null;
+    links.forEach(a => {
+      const isActive = a.getAttribute('href') === '#' + cur;
+      a.classList.toggle('active', isActive);
+      if (isActive) activeLink = a;
     });
-  }, { passive: true });
+    if (activeLink) movePillTo(activeLink);
+  }
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  window.addEventListener('resize', updateActiveLink, { passive: true });
+  updateActiveLink();
+}
+
+/* =====================
+   LOADING INTRO
+===================== */
+function initLoader() {
+  const overlay = document.getElementById('loaderOverlay');
+  if (!overlay) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    overlay.classList.add('loaded');
+    return;
+  }
+
+  window.addEventListener('load', () => {
+    setTimeout(() => overlay.classList.add('loaded'), 550);
+  });
+
+  // Fallback in case 'load' fires very late (slow assets) — never block the UI for long.
+  setTimeout(() => overlay.classList.add('loaded'), 2500);
 }
 
 /* =====================
@@ -537,27 +589,6 @@ function initForm() {
       document.getElementById('fmsg').value = '';
     }, 3000);
   });
-}
-
-/* =====================
-   CURSOR GLOW
-===================== */
-function initCursorGlow() {
-  const glow = document.getElementById('cursorGlow');
-  if (!glow) return;
-  if (window.matchMedia('(hover:none)').matches) return;
-
-  let raf = null;
-  window.addEventListener('mousemove', e => {
-    if (raf) return;
-    raf = requestAnimationFrame(() => {
-      glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%,-50%)`;
-      glow.classList.add('is-active');
-      raf = null;
-    });
-  }, { passive: true });
-
-  document.addEventListener('mouseleave', () => glow.classList.remove('is-active'));
 }
 
 /* =====================
@@ -607,36 +638,131 @@ function initChipReveal() {
 }
 
 /* =====================
-   PROJECT CARD TILT + GLOW
+   MAGNETIC BUTTONS
 ===================== */
-function initProjectTilt() {
+function initMagneticButtons() {
   if (window.matchMedia('(hover:none)').matches) return;
 
-  document.querySelectorAll('.proj-card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const px = (x / rect.width) * 100;
-      const py = (y / rect.height) * 100;
-      card.style.setProperty('--mx', `${px}%`);
-      card.style.setProperty('--my', `${py}%`);
-
-      const rx = ((y / rect.height) - 0.5) * -4;
-      const ry = ((x / rect.width) - 0.5) * 4;
-      card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-3px)`;
+  const maxPull = 7; // px — kept small and subtle
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const rect = btn.getBoundingClientRect();
+      const relX = (e.clientX - rect.left) / rect.width - 0.5;
+      const relY = (e.clientY - rect.top) / rect.height - 0.5;
+      const x = relX * maxPull * 2;
+      const y = relY * maxPull * 2 - 2; // slight lift baked in
+      btn.style.transform = `translate(${x}px, ${y}px)`;
     });
 
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) translateY(0)';
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0, 0)';
     });
   });
+}
+
+/* =====================
+   SECTION PARALLAX
+===================== */
+function initSectionParallax() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(max-width: 900px)').matches) return; // skip on mobile, keep it crisp/simple there
+
+  const targets = document.querySelectorAll('.sec .sec-inner');
+  if (!targets.length) return;
+
+  let raf = null;
+  function update() {
+    const vh = window.innerHeight;
+    targets.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const centerOffset = (rect.top + rect.height / 2) - vh / 2;
+      const shift = Math.max(-18, Math.min(18, centerOffset * -0.025));
+      el.style.transform = `translateY(${shift}px)`;
+    });
+    raf = null;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (raf) return;
+    raf = requestAnimationFrame(update);
+  }, { passive: true });
+
+  update();
+}
+
+/* =====================
+   EXPERIENCE TIMELINE LINE
+===================== */
+function initTimelineLine() {
+  const nav = document.getElementById('expNav');
+  if (!nav) return;
+
+  nav.style.setProperty('--line-h', '100%');
+
+  if (!('IntersectionObserver' in window)) {
+    nav.classList.add('in-view');
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        nav.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  io.observe(nav);
+}
+
+/* =====================
+   ACHIEVEMENT STAT COUNTERS
+===================== */
+function initAchCounters() {
+  const nums = document.querySelectorAll('.ach-stat');
+  if (!nums.length) return;
+
+  const animate = (el) => {
+    const target = parseInt(el.getAttribute('data-count'), 10) || 0;
+    const suffix = el.getAttribute('data-suffix') || '';
+    const duration = 1100;
+    const start = performance.now();
+
+    function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  };
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    nums.forEach(el => {
+      const target = parseInt(el.getAttribute('data-count'), 10) || 0;
+      el.textContent = target + (el.getAttribute('data-suffix') || '');
+    });
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animate(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  nums.forEach(n => io.observe(n));
 }
 
 /* =====================
    INIT
 ===================== */
 document.addEventListener('DOMContentLoaded', () => {
+  initLoader();
   buildMarquee();
   buildExperience();
   buildProjects();
@@ -646,8 +772,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initResumeButton();
   initNav();
   initForm();
-  initCursorGlow();
   initScrollReveal();
   initChipReveal();
-  initProjectTilt();
+  initAchCounters();
+  initTimelineLine();
+  initMagneticButtons();
+  initSectionParallax();
 });
