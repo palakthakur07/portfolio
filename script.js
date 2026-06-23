@@ -72,7 +72,7 @@ const PROJ = [
     desc: 'A hackathon project focused on deepfake detection. Uses AI-based analysis to help identify potentially manipulated media with an accessible upload interface.',
     stack: ['HTML', 'CSS', 'JavaScript'],
     gh: 'https://github.com/palakthakur07/CodeHer',
-    live: 'https://code-her.vercel.app/'
+    live: 'https://deep-shieldx.vercel.app/'
   }
 ];
 
