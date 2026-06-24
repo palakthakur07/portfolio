@@ -29,7 +29,7 @@ const EXP = [
     year: '2025 – Present',
     title: 'Competitive Programming',
     icon: EXP_ICONS.terminal,
-    org: 'LeetCode · CodeChef',
+    org: 'LeetCode · CodeChef · Codeforces . Geekforgeeks',
     desc: 'Solving Data Structures and Algorithms problems to strengthen problem-solving, analytical thinking, and coding skills.',
     tags: ['DSA', 'LeetCode', 'Problem Solving']
   },
