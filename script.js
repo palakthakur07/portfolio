@@ -83,11 +83,11 @@ const SKILLS = [
   },
   {
     label: 'Frameworks & Libraries',
-    chips: ['React', 'TensorFlow', 'Node.js', 'NumPy', 'Pandas', 'Scikit-learn']
+    chips: ['React', 'Node.js']
   },
   {
     label: 'Tools & Platforms',
-    chips: ['Git', 'GitHub', 'VS Code', 'Linux', 'Jupyter Notebook', 'Google Colab']
+    chips: ['Git', 'GitHub', 'VS Code']
   },
   {
     label: 'Data & Databases',
