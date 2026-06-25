@@ -191,6 +191,98 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 }
 
 .hero-inner{display:flex;flex-direction:column;align-items:center;width:100%;position:relative;z-index:1}
+
+/* ---- TWO-COLUMN HERO SPLIT ---- */
+.hero-inner-split{
+  display:grid;grid-template-columns:1.15fr .85fr;
+  gap:3rem;align-items:center;
+  width:100%;max-width:1180px;
+  text-align:left;
+}
+.hero-col-left{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
+.hero-col-left .hero-desc{max-width:480px;margin-left:0}
+.hero-col-left .hero-btns{justify-content:flex-start}
+
+.hero-col-right{
+  width:100%;min-width:0;max-width:100%;
+  display:flex;flex-direction:column;gap:1.2rem;
+  overflow:hidden;
+}
+
+/* Avatar card — same footprint/feel as the stats card in the reference */
+.avatar-card{
+  position:relative;overflow:hidden;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:1.6rem;
+  min-height:280px;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* 3D perspective stage: gives the tilt transform somewhere to "live" in 3D space */
+.avatar-3d-stage{
+  width:100%;height:100%;min-height:248px;
+  border-radius:var(--radius);
+  position:relative;overflow:hidden;
+  perspective:900px;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* Outer wrapper: handles the continuous breathing scale via keyframes */
+.avatar-breathe{
+  width:100%;height:100%;
+  border-radius:var(--radius);
+  animation:avatarBreathe 4.5s ease-in-out infinite;
+  transform-style:preserve-3d;
+}
+@keyframes avatarBreathe{
+  0%,100%{ transform:scale(1); }
+  50%{ transform:scale(1.035); }
+}
+@media(prefers-reduced-motion:reduce){
+  .avatar-breathe{animation:none}
+}
+
+/* Inner image: handles the cursor-driven 3D tilt (JS sets inline transform) */
+.avatar-3d-img{
+  width:100%;height:100%;object-fit:cover;
+  border-radius:var(--radius);
+  display:block;
+  transform-style:preserve-3d;
+  will-change:transform;
+  transform:rotateX(0deg) rotateY(0deg);
+  transition:transform .25s cubic-bezier(.22,1,.36,1);
+  box-shadow:0 25px 50px -20px rgba(0,0,0,.6);
+}
+@media(prefers-reduced-motion:reduce){
+  .avatar-3d-img{transition:none}
+}
+
+/* Tech stack marquee card */
+.marquee-card{
+  width:100%;min-width:0;max-width:100%;overflow:hidden;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:1.8rem 0;
+  backdrop-filter:blur(6px);
+}
+.marquee-card-title{
+  font-family:var(--mono);font-size:.7rem;font-weight:500;
+  color:var(--text2);letter-spacing:.06em;text-transform:uppercase;
+  padding:0 1.8rem;margin-bottom:1.4rem;
+}
+.marquee-card .marquee-wrap{padding:0;width:100%;max-width:100%}
+.marquee-card .marquee-wrap::before{background:linear-gradient(to right,var(--card),transparent);width:48px}
+.marquee-card .marquee-wrap::after{background:linear-gradient(to left,var(--card),transparent);width:48px}
+.marquee-card .marquee-item{padding:0 1.4rem;font-size:.78rem}
+.marquee-card .marquee-item svg{width:19px;height:19px}
+.marquee-card .marquee-track{animation-duration:22s}
+
+@media(max-width:900px){
+  .hero-inner-split{grid-template-columns:1fr;text-align:center;gap:2.5rem}
+  .hero-col-left{align-items:center}
+  .hero-col-left .hero-desc{margin-left:auto;margin-right:auto}
+  .hero-col-left .hero-btns{justify-content:center}
+}
 .hero-eyebrow{
   font-family:var(--sans);font-size:.68rem;font-weight:400;
   color:var(--text3);letter-spacing:.18em;text-transform:uppercase;margin-bottom:1.4rem;

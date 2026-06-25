@@ -478,6 +478,34 @@ function buildAchievements() {
 }
 
 /* =====================
+   HERO AVATAR — 3D CURSOR TILT
+===================== */
+function initHeroAvatarTilt() {
+  const stage = document.getElementById('heroAvatarStage');
+  const img = document.getElementById('heroAvatarImg');
+  if (!stage || !img) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const MAX_TILT = 10; // degrees — kept modest so it feels alive, not gimmicky
+
+  stage.addEventListener('mousemove', e => {
+    const rect = stage.getBoundingClientRect();
+    const relX = (e.clientX - rect.left) / rect.width - 0.5;   // -0.5 .. 0.5
+    const relY = (e.clientY - rect.top) / rect.height - 0.5;   // -0.5 .. 0.5
+
+    const rotateY = relX * MAX_TILT * 2;   // left/right cursor -> Y-axis rotation
+    const rotateX = relY * -MAX_TILT * 2;  // up/down cursor -> X-axis rotation
+
+    img.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+
+  stage.addEventListener('mouseleave', () => {
+    img.style.transform = 'rotateX(0deg) rotateY(0deg)';
+  });
+}
+
+/* =====================
    ABOUT PHOTO UPLOAD
 ===================== */
 function initAboutUpload() {
@@ -702,24 +730,11 @@ function initChipReveal() {
 /* =====================
    MAGNETIC BUTTONS
 ===================== */
+/* =====================
+   MAGNETIC BUTTONS (disabled — caused jittery movement on hover)
+===================== */
 function initMagneticButtons() {
-  if (window.matchMedia('(hover:none)').matches) return;
-
-  const maxPull = 7; // px — kept small and subtle
-  document.querySelectorAll('.btn').forEach(btn => {
-    btn.addEventListener('mousemove', e => {
-      const rect = btn.getBoundingClientRect();
-      const relX = (e.clientX - rect.left) / rect.width - 0.5;
-      const relY = (e.clientY - rect.top) / rect.height - 0.5;
-      const x = relX * maxPull * 2;
-      const y = relY * maxPull * 2 - 2; // slight lift baked in
-      btn.style.transform = `translate(${x}px, ${y}px)`;
-    });
-
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = 'translate(0, 0)';
-    });
-  });
+  // Intentionally a no-op now. Buttons stay static on hover.
 }
 
 /* =====================
@@ -831,6 +846,7 @@ document.addEventListener('DOMContentLoaded', () => {
   buildProjects();
   buildSkills();
   buildAchievements();
+  initHeroAvatarTilt();
   initAboutUpload();
   initResumeButton();
   initNav();
