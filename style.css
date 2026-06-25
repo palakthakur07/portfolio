@@ -9,10 +9,12 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
    CSS VARIABLES
 ===================== */
 :root{
-  --pink:#e8186d;
-  --pink2:#ff3d85;
-  --pink-dim:rgba(232,24,109,0.12);
-  --pink-border:rgba(232,24,109,0.3);
+  --pink:#5b7fff;
+  --pink2:#7c5cff;
+  --pink-dim:rgba(91,127,255,0.12);
+  --pink-border:rgba(91,127,255,0.3);
+  --cyan:#39e0d8;
+  --violet:#9b5cff;
   --bg:#050505;
   --bg2:#0a0a0a;
   --bg3:#0d0d0d;
@@ -130,18 +132,64 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
   align-items:center;justify-content:center;
   padding:54px 2rem 0;position:relative;overflow:hidden;
   text-align:center;
+  background:#030305;
 }
 .hero-bg-glow{
   position:absolute;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 560px 360px at 22% 18%,rgba(232,24,109,.16),transparent 70%),
-    radial-gradient(ellipse 480px 420px at 80% 75%,rgba(255,61,133,.10),transparent 70%);
+    radial-gradient(ellipse 560px 360px at 22% 18%,rgba(91,127,255,.16),transparent 70%),
+    radial-gradient(ellipse 480px 420px at 80% 75%,rgba(57,224,216,.10),transparent 70%);
   animation:heroglow 12s ease-in-out infinite;
 }
 @keyframes heroglow{
   0%,100%{opacity:.85;transform:scale(1)}
   50%{opacity:1;transform:scale(1.06)}
 }
+
+/* ---- SHOOTING STARS ---- */
+.shooting-stars{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  overflow:hidden;
+}
+.shooting-star{
+  position:absolute;
+  top:var(--sy);
+  left:var(--sx);
+  width:var(--slen);
+  height:2px;
+  background:linear-gradient(90deg,
+    rgba(255,255,255,0) 0%,
+    var(--scolor) 70%,
+    #ffffff 100%);
+  border-radius:2px;
+  transform-origin:left center;
+  transform:rotate(35deg) translateX(0) scaleX(0);
+  opacity:0;
+  filter:drop-shadow(0 0 6px var(--scolor));
+  animation:shoot var(--sdur) linear var(--sdelay) infinite;
+}
+@keyframes shoot{
+  0%{
+    opacity:0;
+    transform:rotate(35deg) translateX(0) scaleX(.3);
+  }
+  4%{
+    opacity:1;
+    transform:rotate(35deg) translateX(0) scaleX(1);
+  }
+  80%{
+    opacity:1;
+    transform:rotate(35deg) translateX(var(--stravel)) scaleX(1);
+  }
+  100%{
+    opacity:0;
+    transform:rotate(35deg) translateX(var(--stravel)) scaleX(1);
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .shooting-star{display:none}
+}
+
 .hero-inner{display:flex;flex-direction:column;align-items:center;width:100%;position:relative;z-index:1}
 .hero-eyebrow{
   font-family:var(--sans);font-size:.68rem;font-weight:400;
@@ -184,7 +232,7 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 .btn:active::after{opacity:1;transform:scale(1.3);transition:0s}
 .btn svg{width:14px;height:14px;flex-shrink:0}
 .btn-primary{background:var(--pink);color:#fff}
-.btn-primary:hover{background:var(--pink2);box-shadow:0 10px 24px -8px rgba(232,24,109,.5)}
+.btn-primary:hover{background:var(--pink2);box-shadow:0 10px 24px -8px rgba(91,127,255,.5)}
 .btn-ghost{background:transparent;color:#d0d0d0;border:1px solid var(--border2)}
 .btn-ghost:hover{border-color:var(--pink);color:var(--pink)}
 
@@ -477,13 +525,13 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 }
 .mini-live-dot{
   width:7px;height:7px;border-radius:50%;background:var(--pink);
-  box-shadow:0 0 0 0 rgba(232,24,109,.6);
+  box-shadow:0 0 0 0 rgba(91,127,255,.6);
   animation:liveping 1.8s ease-out infinite;
 }
 @keyframes liveping{
-  0%{box-shadow:0 0 0 0 rgba(232,24,109,.55)}
-  70%{box-shadow:0 0 0 6px rgba(232,24,109,0)}
-  100%{box-shadow:0 0 0 0 rgba(232,24,109,0)}
+  0%{box-shadow:0 0 0 0 rgba(91,127,255,.55)}
+  70%{box-shadow:0 0 0 6px rgba(91,127,255,0)}
+  100%{box-shadow:0 0 0 0 rgba(91,127,255,0)}
 }
 
 /* Content area below the preview */

@@ -29,7 +29,7 @@ const EXP = [
     year: '2025 – Present',
     title: 'Competitive Programming',
     icon: EXP_ICONS.terminal,
-    org: 'LeetCode · CodeChef · Codeforces . Geekforgeeks',
+    org: 'LeetCode · CodeChef',
     desc: 'Solving Data Structures and Algorithms problems to strengthen problem-solving, analytical thinking, and coding skills.',
     tags: ['DSA', 'LeetCode', 'Problem Solving']
   },
@@ -83,11 +83,11 @@ const SKILLS = [
   },
   {
     label: 'Frameworks & Libraries',
-    chips: ['React', 'Node.js']
+    chips: ['React', 'TensorFlow', 'Node.js', 'NumPy', 'Pandas', 'Scikit-learn']
   },
   {
     label: 'Tools & Platforms',
-    chips: ['Git', 'GitHub', 'VS Code']
+    chips: ['Git', 'GitHub', 'VS Code', 'Linux', 'Jupyter Notebook', 'Google Colab']
   },
   {
     label: 'Data & Databases',
@@ -178,6 +178,68 @@ const TECHS = [
     svg: `<svg width="22" height="22" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><path d="M180.988 0l-90.74 83.206L36.01 43.24 0 64.027l67.116 64L0 192.01l36.01 20.773 54.238-39.955L180.988 256 256 219.886V36.114L180.988 0zm.012 72.918v110.164l-55.43-55.082 55.43-55.082z" fill="#fff" fill-opacity=".85"/></svg>`
   }
 ];
+
+/* =====================
+   SHOOTING STARS (Hero only)
+===================== */
+function buildShootingStars() {
+  const wrap = document.getElementById('shootingStars');
+  if (!wrap) return;
+
+  // Blue / purple / cyan palette to match the reference image
+  const COLORS = ['#5b7fff', '#9b5cff', '#39e0d8', '#7c5cff', '#4fd6ff'];
+  const STAR_COUNT = 10; // medium density (8-12)
+
+  // Travel distance scaled to the viewport so streaks cross the whole hero,
+  // not just a fixed pixel amount that may undershoot on large screens.
+  const travel = Math.max(900, window.innerWidth * 1.15);
+
+  // Stratified placement: divide the hero into a grid of horizontal/vertical
+  // zones and place one star per zone (in random order). Pure Math.random()
+  // for every star tends to clump by chance — this guarantees an even spread
+  // across both the left/right halves and the top/bottom of the section.
+  const COLS = 5; // horizontal zones (left -> right)
+  const ROWS = 2; // vertical zones (top -> bottom)
+
+  const zones = [];
+  for (let c = 0; c < COLS; c++) {
+    for (let r = 0; r < ROWS; r++) {
+      zones.push({ c, r });
+    }
+  }
+  // Shuffle so the same zone-order doesn't always fire first
+  for (let i = zones.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [zones[i], zones[j]] = [zones[j], zones[i]];
+  }
+
+  for (let i = 0; i < STAR_COUNT; i++) {
+    const zone = zones[i % zones.length];
+    const colWidth = 100 / COLS;
+    const rowHeight = 100 / ROWS;
+
+    const star = document.createElement('div');
+    star.className = 'shooting-star';
+
+    // Random position within this zone, keeping the overall spread even.
+    const left = zone.c * colWidth + Math.random() * colWidth;
+    const top = zone.r * rowHeight + Math.random() * rowHeight;
+    const len = 90 + Math.random() * 140;          // streak length (px)
+    const dur = 2.4 + Math.random() * 3.2;          // travel duration (s)
+    const delay = Math.random() * 8;                // stagger start times (s)
+    const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+
+    star.style.setProperty('--sy', `${top}%`);
+    star.style.setProperty('--sx', `${left}%`);
+    star.style.setProperty('--slen', `${len}px`);
+    star.style.setProperty('--sdur', `${dur}s`);
+    star.style.setProperty('--sdelay', `${delay}s`);
+    star.style.setProperty('--scolor', color);
+    star.style.setProperty('--stravel', `${travel}px`);
+
+    wrap.appendChild(star);
+  }
+}
 
 /* =====================
    MARQUEE
@@ -763,6 +825,7 @@ function initAchCounters() {
 ===================== */
 document.addEventListener('DOMContentLoaded', () => {
   initLoader();
+  buildShootingStars();
   buildMarquee();
   buildExperience();
   buildProjects();
