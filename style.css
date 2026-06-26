@@ -215,47 +215,19 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--radius-lg);
   padding:1.6rem;
-  min-height:280px;
+  min-height:320px;
   display:flex;align-items:center;justify-content:center;
 }
 
-/* 3D perspective stage: gives the tilt transform somewhere to "live" in 3D space */
-.avatar-3d-stage{
-  width:100%;height:100%;min-height:248px;
+/* Real 3D model viewer (Google <model-viewer>) — drag to rotate */
+.hero-model-viewer{
+  width:100%;height:100%;min-height:288px;
   border-radius:var(--radius);
-  position:relative;overflow:hidden;
-  perspective:900px;
-  display:flex;align-items:center;justify-content:center;
+  --poster-color:transparent;
 }
-
-/* Outer wrapper: handles the continuous breathing scale via keyframes */
-.avatar-breathe{
-  width:100%;height:100%;
-  border-radius:var(--radius);
-  animation:avatarBreathe 4.5s ease-in-out infinite;
-  transform-style:preserve-3d;
-}
-@keyframes avatarBreathe{
-  0%,100%{ transform:scale(1); }
-  50%{ transform:scale(1.035); }
-}
-@media(prefers-reduced-motion:reduce){
-  .avatar-breathe{animation:none}
-}
-
-/* Inner image: handles the cursor-driven 3D tilt (JS sets inline transform) */
-.avatar-3d-img{
-  width:100%;height:100%;object-fit:cover;
-  border-radius:var(--radius);
-  display:block;
-  transform-style:preserve-3d;
-  will-change:transform;
-  transform:rotateX(0deg) rotateY(0deg);
-  transition:transform .25s cubic-bezier(.22,1,.36,1);
-  box-shadow:0 25px 50px -20px rgba(0,0,0,.6);
-}
-@media(prefers-reduced-motion:reduce){
-  .avatar-3d-img{transition:none}
+.model-loading-bar{
+  background:var(--pink);height:3px;width:0%;
+  transition:width .3s;
 }
 
 /* Tech stack marquee card */
@@ -647,8 +619,15 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
   text-decoration:none;transition:.2s;display:flex;align-items:center;gap:.4rem;
 }
 .proj-gh:hover{color:var(--pink)}
-.proj-arrow{font-size:.9rem;color:var(--border2);transition:.2s}
+.proj-live-link{
+  font-family:var(--mono);font-size:.74rem;color:var(--text2);
+  text-decoration:none;transition:.2s;display:flex;align-items:center;gap:.4rem;
+  cursor:pointer;
+}
+.proj-live-link:hover{color:var(--pink)}
+.proj-arrow{font-size:.9rem;color:var(--border2);transition:.2s;text-decoration:none;display:inline-block;cursor:pointer}
 .proj-card:hover .proj-arrow{color:var(--pink)}
+.proj-arrow:hover{color:var(--pink2)!important}
 
 /* =====================
    SKILLS
@@ -684,61 +663,96 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 }
 
 /* =====================
-   ACHIEVEMENTS
+   ACHIEVEMENTS — STACK DECK
 ===================== */
-.ach-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:1.5rem;
+.stack-wrap{
+  display:flex;flex-direction:column;align-items:center;
+  width:100%;
+}
+.stack-deck{
+  position:relative;
+  width:100%;max-width:480px;
+  height:21rem;
+  margin-bottom:2rem;
 }
 .ach-card{
-  position:relative;
+  position:absolute;
+  inset:0;
+  margin:0 auto;
+  width:100%;
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--radius-lg);
-  padding:2.2rem 1.8rem;
-  transition:border-color .25s,transform .25s,box-shadow .25s,background .25s;
+  padding:2rem 1.8rem;
   overflow:hidden;
+  cursor:default;
+  transform-origin:center bottom;
+  transition:transform .55s cubic-bezier(.22,1,.36,1),
+             opacity .55s cubic-bezier(.22,1,.36,1),
+             border-color .25s,box-shadow .25s;
+  box-shadow:0 20px 45px -20px rgba(0,0,0,.7);
 }
+/* Per-card accent strip along the top edge — this sliver is what "peeks"
+   above the front card when a card sits further back in the stack. */
 .ach-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--pink),var(--pink2));
-  opacity:0;transition:opacity .25s;
+  content:'';position:absolute;top:0;left:0;right:0;height:6px;
+  background:var(--stack-accent, linear-gradient(90deg,var(--pink),var(--pink2)));
 }
-.ach-card:hover{
-  background:var(--bg3);border-color:var(--pink-border);
-  transform:translateY(-4px);
-  box-shadow:0 18px 36px -18px rgba(0,0,0,.65);
+.ach-card.is-front{
+  z-index:10;
 }
-.ach-card:hover::before{opacity:1}
+.ach-card.is-front:hover{
+  border-color:var(--pink-border);
+  box-shadow:0 28px 56px -20px rgba(0,0,0,.8);
+}
 .ach-num{
   font-family:var(--mono);font-size:.65rem;color:var(--text3);
-  margin-bottom:1.4rem;letter-spacing:.04em;
+  margin-bottom:1.3rem;letter-spacing:.04em;
 }
 .ach-icon-wrap{
-  width:46px;height:46px;border-radius:10px;
+  width:44px;height:44px;border-radius:10px;
   background:var(--pink-dim);border:1px solid var(--pink-border);
   display:flex;align-items:center;justify-content:center;
-  margin-bottom:1.3rem;color:var(--pink);
-  transition:background .25s,transform .25s;
+  margin-bottom:1.2rem;color:var(--pink);
 }
-.ach-card:hover .ach-icon-wrap{
-  background:var(--pink);color:#fff;transform:scale(1.06);
-}
-.ach-stat-row{
-  display:flex;align-items:baseline;gap:.5rem;margin-bottom:.6rem;
-}
-.ach-stat{
-  font-family:var(--syne);font-size:1.9rem;font-weight:800;
-  color:var(--pink);letter-spacing:-.02em;line-height:1;
-}
-.ach-stat-label{
-  font-family:var(--mono);font-size:.62rem;color:var(--text3);
-  letter-spacing:.05em;text-transform:uppercase;
+.ach-card.is-front:hover .ach-icon-wrap{
+  background:var(--pink);color:#fff;
 }
 .ach-title{
-  font-family:var(--syne);font-size:1.02rem;font-weight:700;
-  color:var(--text);margin-bottom:.55rem;letter-spacing:-.01em;
+  font-family:var(--syne);font-size:1.05rem;font-weight:700;
+  color:var(--text);margin-bottom:.6rem;letter-spacing:-.01em;
+  line-height:1.3;
 }
-.ach-desc{font-size:.82rem;color:var(--text2);line-height:1.8;font-weight:300}
+.ach-desc{font-size:.83rem;color:var(--text2);line-height:1.8;font-weight:300}
+
+/* Cards behind the front one shrink their visible content to nothing —
+   only the colored top strip (::before) and a hint of card background show */
+.ach-card:not(.is-front) .ach-num,
+.ach-card:not(.is-front) .ach-icon-wrap,
+.ach-card:not(.is-front) .ach-title,
+.ach-card:not(.is-front) .ach-desc{
+  opacity:0;
+}
+
+/* Pagination controls below the stack */
+.stack-controls{
+  display:flex;align-items:center;justify-content:center;gap:1.2rem;
+}
+.stack-arrow{
+  display:flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border-radius:50%;
+  background:var(--card);border:1px solid var(--border2);
+  color:var(--text2);cursor:pointer;flex-shrink:0;
+  transition:border-color .2s,color .2s,background .2s;
+}
+.stack-arrow:hover{border-color:var(--pink);color:var(--pink);background:var(--pink-dim)}
+.stack-arrow svg{width:16px;height:16px}
+.stack-dots{display:flex;align-items:center;gap:.5rem}
+.stack-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--border2);
+  transition:transform .25s,background .25s;
+}
+.stack-dot.is-active{background:var(--pink);transform:scale(1.35)}
 
 /* =====================
    CONTACT
@@ -839,11 +853,13 @@ footer{
   .mini-browser-screen{min-height:240px}
   .proj-content{padding:1.4rem 1.4rem}
   .proj-title{font-size:1.05rem}
-  .ach-grid{grid-template-columns:repeat(2,1fr)}
+  .ach-card{padding:1.6rem 1.4rem}
+  .stack-deck{height:19rem}
 }
 @media(max-width:600px){
   .sec{padding:4rem 1.2rem}
-  .ach-grid{grid-template-columns:1fr}
+  .ach-card{padding:1.4rem 1.2rem}
+  .stack-deck{height:18rem}
   .hero-name{font-size:2.8rem}
   footer{padding:2rem 1.5rem}
 }

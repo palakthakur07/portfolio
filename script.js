@@ -364,7 +364,9 @@ function buildProjects() {
         <div class="proj-stack">${p.stack.map(s => `<span>${s}</span>`).join('')}</div>
         <div class="proj-footer">
           <a href="${p.gh}" target="_blank" class="proj-gh">↗ View on GitHub</a>
-          <span class="proj-arrow">↗</span>
+          ${hasLive
+            ? `<a href="${p.live}" target="_blank" rel="noopener noreferrer" class="proj-live-link" title="Open live site">Live Site ↗</a>`
+            : `<span class="proj-arrow">↗</span>`}
         </div>
       </div>`;
     list.appendChild(card);
@@ -458,50 +460,101 @@ function buildSkills() {
 }
 
 /* =====================
-   ACHIEVEMENTS
+   ACHIEVEMENTS — STACK DECK
 ===================== */
 function buildAchievements() {
-  const grid = document.getElementById('achGrid');
-  if (!grid) return;
+  const deck = document.getElementById('achStack');
+  const dotsWrap = document.getElementById('achStackDots');
+  const prevBtn = document.getElementById('achStackPrev');
+  const nextBtn = document.getElementById('achStackNext');
+  if (!deck || !dotsWrap || !prevBtn || !nextBtn) return;
 
-  ACH.forEach((a, i) => {
+  const total = ACH.length;
+  if (!total) return;
+
+  // A distinct accent color per card, cycling through the theme palette
+  // (used for the thin top strip that "peeks" above the front card)
+  const ACCENTS = [
+    'linear-gradient(90deg,var(--pink),var(--pink2))',
+    'linear-gradient(90deg,var(--cyan),var(--pink))',
+    'linear-gradient(90deg,var(--violet),var(--pink2))',
+    'linear-gradient(90deg,var(--pink2),var(--cyan))',
+    'linear-gradient(90deg,var(--violet),var(--cyan))',
+  ];
+
+  const cardEls = ACH.map((a, i) => {
     const card = document.createElement('div');
-    card.className = 'ach-card reveal-up';
-    card.style.setProperty('--d', `${i * 0.1}s`);
+    card.className = 'ach-card';
+    card.dataset.index = i;
+    card.style.setProperty('--stack-accent', ACCENTS[i % ACCENTS.length]);
     card.innerHTML = `
       <div class="ach-num">${a.num}</div>
       <div class="ach-icon-wrap">${a.icon}</div>
       <div class="ach-title">${a.title}</div>
       <div class="ach-desc">${a.desc}</div>`;
-    grid.appendChild(card);
+    deck.appendChild(card);
+    return card;
   });
+
+  const dotEls = ACH.map(() => {
+    const dot = document.createElement('span');
+    dot.className = 'stack-dot';
+    dotsWrap.appendChild(dot);
+    return dot;
+  });
+
+  let frontIndex = 0;
+  const MAX_DEPTH = 4; // how many cards behind the front one get a visible "peek" strip
+
+  function layout() {
+    cardEls.forEach((card, i) => {
+      // depth: 0 = front (fully visible), 1,2,3... = how far back in the stack
+      const depth = (i - frontIndex + total) % total;
+      const isFront = depth === 0;
+      const clampedDepth = Math.min(depth, MAX_DEPTH);
+
+      card.classList.toggle('is-front', isFront);
+
+      const y = -clampedDepth * 14;     // each card peeks a bit further up than the one in front of it
+      const scale = 1 - clampedDepth * 0.045;
+      const opacity = depth > MAX_DEPTH ? 0 : 1;
+
+      card.style.transform = `translateY(${y}px) scale(${scale})`;
+      card.style.opacity = opacity;
+      card.style.zIndex = total - depth;
+      card.style.pointerEvents = isFront ? 'auto' : 'none';
+    });
+
+    dotEls.forEach((dot, i) => dot.classList.toggle('is-active', i === frontIndex));
+  }
+
+  function cycle(direction) {
+    frontIndex = direction === 'right'
+      ? (frontIndex + 1) % total
+      : (frontIndex - 1 + total) % total;
+    layout();
+  }
+  prevBtn.addEventListener('click', () => cycle('left'));
+  nextBtn.addEventListener('click', () => cycle('right'));
+
+  layout();
 }
 
 /* =====================
-   HERO AVATAR — 3D CURSOR TILT
+   HERO 3D MODEL — loading progress bar
 ===================== */
-function initHeroAvatarTilt() {
-  const stage = document.getElementById('heroAvatarStage');
-  const img = document.getElementById('heroAvatarImg');
-  if (!stage || !img) return;
+function initHeroModelViewer() {
+  const mv = document.getElementById('heroModelViewer');
+  if (!mv) return;
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  const MAX_TILT = 10; // degrees — kept modest so it feels alive, not gimmicky
-
-  stage.addEventListener('mousemove', e => {
-    const rect = stage.getBoundingClientRect();
-    const relX = (e.clientX - rect.left) / rect.width - 0.5;   // -0.5 .. 0.5
-    const relY = (e.clientY - rect.top) / rect.height - 0.5;   // -0.5 .. 0.5
-
-    const rotateY = relX * MAX_TILT * 2;   // left/right cursor -> Y-axis rotation
-    const rotateX = relY * -MAX_TILT * 2;  // up/down cursor -> X-axis rotation
-
-    img.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  });
-
-  stage.addEventListener('mouseleave', () => {
-    img.style.transform = 'rotateX(0deg) rotateY(0deg)';
+  mv.addEventListener('progress', (event) => {
+    const bar = mv.querySelector('.model-loading-bar');
+    if (!bar) return;
+    const progress = event.detail.totalProgress * 100;
+    bar.style.width = `${progress}%`;
+    if (progress >= 100) {
+      setTimeout(() => { bar.style.opacity = '0'; }, 300);
+    }
   });
 }
 
@@ -846,7 +899,7 @@ document.addEventListener('DOMContentLoaded', () => {
   buildProjects();
   buildSkills();
   buildAchievements();
-  initHeroAvatarTilt();
+  initHeroModelViewer();
   initAboutUpload();
   initResumeButton();
   initNav();

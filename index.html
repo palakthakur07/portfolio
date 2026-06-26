@@ -6,6 +6,7 @@
 <title>Palak Thakur — Portfolio</title>
 <link rel="stylesheet" href="style.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
 <body>
 
@@ -59,11 +60,20 @@
     </div>
     <div class="hero-col-right">
       <div class="avatar-card reveal-up" id="heroAvatarCard" style="--d:.35s">
-        <div class="avatar-3d-stage" id="heroAvatarStage">
-          <div class="avatar-breathe">
-            <img class="avatar-3d-img" id="heroAvatarImg" src="assets/avatar.jpg" alt="Palak Thakur"/>
-          </div>
-        </div>
+        <model-viewer
+          id="heroModelViewer"
+          src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+          alt="A rotatable 3D model"
+          camera-controls
+          disable-zoom
+          interaction-prompt="none"
+          shadow-intensity="1"
+          exposure="1"
+          camera-orbit="0deg 75deg 105%"
+          field-of-view="30deg"
+          class="hero-model-viewer">
+          <div class="model-loading-bar" slot="progress-bar"></div>
+        </model-viewer>
       </div>
       <div class="marquee-card reveal-up" style="--d:.45s">
         <h3 class="marquee-card-title">Tech Stack</h3>
@@ -144,7 +154,18 @@
     <div class="sec-label reveal-up">Achievements</div>
     <h2 class="sec-title reveal-up">Milestones &amp; <span>Recognitions</span></h2>
     <p class="sec-subdesc reveal-up">A quick snapshot of competitions, learning milestones, and technical wins.</p>
-    <div class="ach-grid" id="achGrid"></div>
+    <div class="stack-wrap reveal-up">
+      <div class="stack-deck" id="achStack"></div>
+      <div class="stack-controls" id="achStackControls">
+        <button class="stack-arrow" id="achStackPrev" type="button" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="stack-dots" id="achStackDots"></div>
+        <button class="stack-arrow" id="achStackNext" type="button" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
   </div>
 </section>
 
