@@ -134,6 +134,7 @@
     <div class="sec-label reveal-up">Work</div>
     <h2 class="sec-title reveal-up">Featured <span>Projects</span></h2>
     <p class="sec-subdesc reveal-up">Here are some of the most recent projects I have been working on</p>
+    <div class="proj-tabs reveal-up" id="projTabs"></div>
     <div class="proj-list" id="projList"></div>
   </div>
 </section>
@@ -154,17 +155,14 @@
     <div class="sec-label reveal-up">Achievements</div>
     <h2 class="sec-title reveal-up">Milestones &amp; <span>Recognitions</span></h2>
     <p class="sec-subdesc reveal-up">A quick snapshot of competitions, learning milestones, and technical wins.</p>
-    <div class="stack-wrap reveal-up">
-      <div class="stack-deck" id="achStack"></div>
-      <div class="stack-controls" id="achStackControls">
-        <button class="stack-arrow" id="achStackPrev" type="button" aria-label="Previous">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <div class="stack-dots" id="achStackDots"></div>
-        <button class="stack-arrow" id="achStackNext" type="button" aria-label="Next">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
+    <div class="ach-carousel reveal-up">
+      <button class="ach-car-arrow ach-car-arrow-left" id="achCarPrev" type="button" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="ach-car-track" id="achCarTrack"></div>
+      <button class="ach-car-arrow ach-car-arrow-right" id="achCarNext" type="button" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
   </div>
 </section>
