@@ -556,21 +556,6 @@ function buildAchievements() {
 /* =====================
    HERO 3D MODEL — loading progress bar
 ===================== */
-function initHeroModelViewer() {
-  const mv = document.getElementById('heroModelViewer');
-  if (!mv) return;
-
-  mv.addEventListener('progress', (event) => {
-    const bar = mv.querySelector('.model-loading-bar');
-    if (!bar) return;
-    const progress = event.detail.totalProgress * 100;
-    bar.style.width = `${progress}%`;
-    if (progress >= 100) {
-      setTimeout(() => { bar.style.opacity = '0'; }, 300);
-    }
-  });
-}
-
 /* =====================
    ABOUT PHOTO UPLOAD
 ===================== */
@@ -912,7 +897,6 @@ document.addEventListener('DOMContentLoaded', () => {
   buildProjects();
   buildSkills();
   buildAchievements();
-  initHeroModelViewer();
   initAboutUpload();
   initResumeButton();
   initNav();

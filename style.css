@@ -9,12 +9,12 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
    CSS VARIABLES
 ===================== */
 :root{
-  --pink:#5b7fff;
-  --pink2:#7c5cff;
-  --pink-dim:rgba(91,127,255,0.12);
-  --pink-border:rgba(91,127,255,0.3);
+  --pink:#9b3fd4;
+  --pink2:#b85ce8;
+  --pink-dim:rgba(155,63,212,0.14);
+  --pink-border:rgba(155,63,212,0.32);
   --cyan:#39e0d8;
-  --violet:#9b5cff;
+  --violet:#7c2cc4;
   --bg:#050505;
   --bg2:#0a0a0a;
   --bg3:#0d0d0d;
@@ -137,7 +137,7 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 .hero-bg-glow{
   position:absolute;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 560px 360px at 22% 18%,rgba(91,127,255,.16),transparent 70%),
+    radial-gradient(ellipse 560px 360px at 22% 18%,rgba(155,63,212,.16),transparent 70%),
     radial-gradient(ellipse 480px 420px at 80% 75%,rgba(57,224,216,.10),transparent 70%);
   animation:heroglow 12s ease-in-out infinite;
 }
@@ -205,33 +205,36 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 
 .hero-col-right{
   width:100%;min-width:0;max-width:100%;
-  display:flex;flex-direction:column;gap:1.2rem;
-  overflow:hidden;
+  display:flex;flex-direction:column;
 }
 
 /* Avatar card — same footprint/feel as the stats card in the reference */
-.avatar-card{
-  position:relative;overflow:hidden;
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--radius-lg);
-  padding:1.6rem;
-  min-height:320px;
+/* Spline 3D robot — masked so any baked-in scene backdrop fades out before
+   reaching the tech stack card, and overlapped so the robot's cube platform
+   visually rests on top of that card. */
+.spline-robot-wrap{
+  position:relative;
+  width:100%;
+  height:340px;
   display:flex;align-items:center;justify-content:center;
+  pointer-events:auto;
+  margin-bottom:-90px;   /* pulls the tech card up so the cube appears to sit on it */
+  z-index:1;
+  -webkit-mask-image:linear-gradient(to bottom, black 0%, black 72%, transparent 96%);
+  mask-image:linear-gradient(to bottom, black 0%, black 72%, transparent 96%);
 }
-
-/* Real 3D model viewer (Google <model-viewer>) — drag to rotate */
-.hero-model-viewer{
-  width:100%;height:100%;min-height:288px;
-  border-radius:var(--radius);
-  --poster-color:transparent;
+.hero-robot-viewer{
+  width:100%;height:100%;
+  display:block;
+  background:transparent;
 }
-.model-loading-bar{
-  background:var(--pink);height:3px;width:0%;
-  transition:width .3s;
+@media(max-width:700px){
+  .spline-robot-wrap{height:280px;margin-bottom:-70px}
 }
 
 /* Tech stack marquee card */
 .marquee-card{
+  position:relative;z-index:2;
   width:100%;min-width:0;max-width:100%;overflow:hidden;
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--radius-lg);padding:1.8rem 0;
@@ -296,7 +299,7 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 .btn:active::after{opacity:1;transform:scale(1.3);transition:0s}
 .btn svg{width:14px;height:14px;flex-shrink:0}
 .btn-primary{background:var(--pink);color:#fff}
-.btn-primary:hover{background:var(--pink2);box-shadow:0 10px 24px -8px rgba(91,127,255,.5)}
+.btn-primary:hover{background:var(--pink2);box-shadow:0 10px 24px -8px rgba(155,63,212,.5)}
 .btn-ghost{background:transparent;color:#d0d0d0;border:1px solid var(--border2)}
 .btn-ghost:hover{border-color:var(--pink);color:var(--pink)}
 
@@ -662,7 +665,7 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 .skill-box:hover{
   transform:translateY(-6px);
   border-color:var(--pink-border);
-  box-shadow:0 20px 40px -20px rgba(91,127,255,.35);
+  box-shadow:0 20px 40px -20px rgba(155,63,212,.35);
 }
 .skill-box:hover::before{transform:scaleX(1)}
 .skill-box-label{
@@ -689,7 +692,7 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 .skill-row:hover{
   background:var(--pink-dim);border-color:var(--pink);
   transform:translateX(4px) scale(1.03);
-  box-shadow:0 6px 16px -8px rgba(91,127,255,.4);
+  box-shadow:0 6px 16px -8px rgba(155,63,212,.4);
 }
 .skill-icon{
   display:flex;align-items:center;justify-content:center;
