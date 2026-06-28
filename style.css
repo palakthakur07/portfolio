@@ -209,29 +209,32 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 }
 
 /* Avatar card — same footprint/feel as the stats card in the reference */
-/* Spline 3D robot — masked so any baked-in scene backdrop fades out before
-   reaching the tech stack card, and overlapped so the robot's cube platform
-   visually rests on top of that card. A rounded bottom edge plus a soft
-   glow on the card below help the two pieces blend at the seam. */
-.spline-robot-wrap{
+/* Hero character illustration — sized down and overlapped with the tech
+   stack card below so the character's legs appear to merge into the top
+   of that card, with no extra card/box around the character itself. */
+.hero-character-wrap{
   position:relative;
   width:100%;
-  height:340px;
-  display:flex;align-items:center;justify-content:center;
-  pointer-events:auto;
-  margin-bottom:-90px;   /* pulls the tech card up so the cube appears to sit on it */
+  display:flex;align-items:flex-end;justify-content:center;
+  overflow:visible;
+  margin-bottom:-70px;   /* pulls the tech card up so the character's legs overlap into it */
   z-index:1;
-  border-radius:0 0 var(--radius-lg) var(--radius-lg);
-  -webkit-mask-image:linear-gradient(to bottom, black 0%, black 72%, transparent 96%);
-  mask-image:linear-gradient(to bottom, black 0%, black 72%, transparent 96%);
+  pointer-events:none;
 }
-.hero-robot-viewer{
-  width:100%;height:100%;
+.hero-character-img{
+  width:103%;
+  max-width:430px;
+  height:auto;
   display:block;
-  background:transparent;
+  filter:drop-shadow(0 30px 50px rgba(0,0,0,.5));
+}
+@media(max-width:900px){
+  .hero-character-wrap{margin-bottom:-50px}
+  .hero-character-img{width:68%;max-width:270px}
 }
 @media(max-width:700px){
-  .spline-robot-wrap{height:280px;margin-bottom:-70px}
+  .hero-character-wrap{margin-bottom:-40px}
+  .hero-character-img{width:65%;max-width:235px}
 }
 
 /* Tech stack marquee card */
