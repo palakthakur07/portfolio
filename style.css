@@ -211,7 +211,8 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 /* Avatar card — same footprint/feel as the stats card in the reference */
 /* Spline 3D robot — masked so any baked-in scene backdrop fades out before
    reaching the tech stack card, and overlapped so the robot's cube platform
-   visually rests on top of that card. */
+   visually rests on top of that card. A rounded bottom edge plus a soft
+   glow on the card below help the two pieces blend at the seam. */
 .spline-robot-wrap{
   position:relative;
   width:100%;
@@ -220,6 +221,7 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
   pointer-events:auto;
   margin-bottom:-90px;   /* pulls the tech card up so the cube appears to sit on it */
   z-index:1;
+  border-radius:0 0 var(--radius-lg) var(--radius-lg);
   -webkit-mask-image:linear-gradient(to bottom, black 0%, black 72%, transparent 96%);
   mask-image:linear-gradient(to bottom, black 0%, black 72%, transparent 96%);
 }
@@ -236,9 +238,20 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 .marquee-card{
   position:relative;z-index:2;
   width:100%;min-width:0;max-width:100%;overflow:hidden;
-  background:var(--card);border:1px solid var(--border);
+  background:var(--card);border:1px solid var(--border2);
   border-radius:var(--radius-lg);padding:1.8rem 0;
   backdrop-filter:blur(6px);
+  box-shadow:0 30px 60px -30px rgba(0,0,0,.8);
+}
+.marquee-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:90px;
+  background:radial-gradient(ellipse 80% 100% at 50% 0%, rgba(155,63,212,.28), transparent 75%);
+  pointer-events:none;z-index:0;
+}
+.marquee-card::after{
+  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg, transparent, var(--pink-border), transparent);
+  pointer-events:none;z-index:1;
 }
 .marquee-card-title{
   font-family:var(--mono);font-size:.7rem;font-weight:500;
