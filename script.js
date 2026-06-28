@@ -556,6 +556,36 @@ function buildAchievements() {
 /* =====================
    HERO 3D MODEL — loading progress bar
 ===================== */
+
+/* =====================
+   HERO CHARACTER — CURSOR TILT
+===================== */
+function initHeroCharacterTilt() {
+  const wrap = document.getElementById('heroCharacterWrap');
+  const img = document.getElementById('heroCharacterImg');
+  if (!wrap || !img) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(hover: none)').matches) return; // skip on touch devices
+
+  const MAX_TILT = 8; // degrees — kept modest so it feels alive, not gimmicky
+
+  wrap.addEventListener('mousemove', e => {
+    const rect = wrap.getBoundingClientRect();
+    const relX = (e.clientX - rect.left) / rect.width - 0.5;   // -0.5 .. 0.5
+    const relY = (e.clientY - rect.top) / rect.height - 0.5;   // -0.5 .. 0.5
+
+    const rotateY = relX * MAX_TILT * 2;   // left/right cursor -> Y-axis rotation
+    const rotateX = relY * -MAX_TILT * 2;  // up/down cursor -> X-axis rotation
+
+    img.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+
+  wrap.addEventListener('mouseleave', () => {
+    img.style.transform = 'rotateX(0deg) rotateY(0deg)';
+  });
+}
+
 /* =====================
    ABOUT PHOTO UPLOAD
 ===================== */
@@ -693,12 +723,52 @@ function initLoader() {
     return;
   }
 
-  window.addEventListener('load', () => {
-    setTimeout(() => overlay.classList.add('loaded'), 550);
-  });
+  splitLoaderTextIntoLetters();
 
-  // Fallback in case 'load' fires very late (slow assets) — never block the UI for long.
-  setTimeout(() => overlay.classList.add('loaded'), 2500);
+  const MIN_DISPLAY_MS = 2000; // loader always stays visible at least this long
+  const startTime = performance.now();
+
+  function hideLoader() {
+    const elapsed = performance.now() - startTime;
+    const remaining = Math.max(0, MIN_DISPLAY_MS - elapsed);
+    setTimeout(() => overlay.classList.add('loaded'), remaining);
+  }
+
+  window.addEventListener('load', hideLoader);
+
+  // Fallback in case 'load' never fires (e.g. a stalled request) — still
+  // respects the same 3-second minimum, just guarantees we don't hang forever.
+  setTimeout(hideLoader, 8000);
+}
+
+/* Wraps each character of the loader text in its own span so it can pulse
+   individually, staggered by position — while preserving the colored
+   <span> wrapper around the surname (kept as a nested element instead of
+   being flattened into plain text). */
+function splitLoaderTextIntoLetters() {
+  const textEl = document.getElementById('loaderText');
+  if (!textEl) return;
+
+  let letterIndex = 0;
+
+  function wrapNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const frag = document.createDocumentFragment();
+      node.textContent.split('').forEach(ch => {
+        const span = document.createElement('span');
+        span.className = 'loader-letter';
+        span.style.animationDelay = `${letterIndex * 0.1}s`;
+        span.textContent = ch;
+        frag.appendChild(span);
+        letterIndex++;
+      });
+      node.replaceWith(frag);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      Array.from(node.childNodes).forEach(wrapNode);
+    }
+  }
+
+  Array.from(textEl.childNodes).forEach(wrapNode);
 }
 
 /* =====================
@@ -897,6 +967,7 @@ document.addEventListener('DOMContentLoaded', () => {
   buildProjects();
   buildSkills();
   buildAchievements();
+  initHeroCharacterTilt();
   initAboutUpload();
   initResumeButton();
   initNav();

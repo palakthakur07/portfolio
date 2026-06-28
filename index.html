@@ -11,7 +11,10 @@
 
 <!-- LOADING INTRO -->
 <div class="loader-overlay" id="loaderOverlay">
-  <div class="loader-text">Palak <span>Thakur</span></div>
+  <div class="loader-ring-wrap">
+    <div class="loader-text" id="loaderText">Palak <span>Thakur</span></div>
+    <div class="loader-ring"></div>
+  </div>
 </div>
 
 <!-- NAV -->
@@ -59,7 +62,9 @@
     </div>
     <div class="hero-col-right">
       <div class="hero-character-wrap reveal-up" id="heroCharacterWrap" style="--d:.35s">
-        <img src="assets/hero-character.png" alt="Palak Thakur character illustration" class="hero-character-img"/>
+        <div class="hero-character-float">
+          <img id="heroCharacterImg" src="assets/hero-character.png" alt="Palak Thakur character illustration" class="hero-character-img"/>
+        </div>
       </div>
       <div class="marquee-card reveal-up" style="--d:.45s">
         <h3 class="marquee-card-title">Tech Stack</h3>

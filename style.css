@@ -43,16 +43,68 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 .loader-overlay.loaded{
   opacity:0;visibility:hidden;pointer-events:none;
 }
+
+.loader-ring-wrap{
+  position:relative;
+  width:180px;height:180px;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* Rotating glow ring — recolored from the reference's sky-blue to the
+   site's violet/purple/cyan accent palette */
+.loader-ring{
+  position:absolute;inset:0;
+  border-radius:50%;
+  animation:loaderRing 5s linear infinite;
+}
+@keyframes loaderRing{
+  0%{
+    transform:rotate(90deg);
+    box-shadow:
+      0 6px 12px 0 var(--cyan) inset,
+      0 12px 18px 0 var(--pink) inset,
+      0 36px 36px 0 var(--violet) inset,
+      0 0 3px 1.2px rgba(155,63,212,.3),
+      0 0 6px 1.8px rgba(184,92,232,.2);
+  }
+  50%{
+    transform:rotate(270deg);
+    box-shadow:
+      0 6px 12px 0 var(--pink2) inset,
+      0 12px 6px 0 var(--violet) inset,
+      0 24px 36px 0 var(--pink) inset,
+      0 0 3px 1.2px rgba(155,63,212,.3),
+      0 0 6px 1.8px rgba(184,92,232,.2);
+  }
+  100%{
+    transform:rotate(450deg);
+    box-shadow:
+      0 6px 12px 0 var(--cyan) inset,
+      0 12px 18px 0 var(--pink) inset,
+      0 36px 36px 0 var(--violet) inset,
+      0 0 3px 1.2px rgba(155,63,212,.3),
+      0 0 6px 1.8px rgba(184,92,232,.2);
+  }
+}
+
 .loader-text{
-  font-family:var(--syne);font-size:1.4rem;font-weight:700;
+  position:relative;z-index:1;
+  font-family:var(--syne);font-size:1.2rem;font-weight:700;
   color:var(--text);letter-spacing:-.01em;
-  opacity:0;transform:translateY(10px) scale(.97);
-  animation:loaderIn .6s cubic-bezier(.16,1,.3,1) .15s forwards;
+  display:flex;
 }
 .loader-text span{color:var(--pink)}
-@keyframes loaderIn{
-  to{opacity:1;transform:translateY(0) scale(1)}
+.loader-letter{
+  display:inline-block;
+  opacity:.4;
+  animation:loaderLetter 3s infinite;
 }
+@keyframes loaderLetter{
+  0%,100%{ opacity:.4; transform:translateY(0); }
+  20%{ opacity:1; transform:scale(1.15); }
+  40%{ opacity:.7; transform:translateY(0); }
+}
+
 @media(prefers-reduced-motion:reduce){
   .loader-overlay{display:none}
 }
@@ -219,14 +271,35 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
   overflow:visible;
   margin-bottom:-70px;   /* pulls the tech card up so the character's legs overlap into it */
   z-index:1;
-  pointer-events:none;
+  pointer-events:auto;
+  perspective:1200px;
 }
+/* Outer: handles the continuous floating drift via CSS keyframes */
+.hero-character-float{
+  animation:characterFloat 4.5s ease-in-out infinite;
+  transform-style:preserve-3d;
+}
+@keyframes characterFloat{
+  0%,100%{ transform:translateY(0) rotateZ(0deg); }
+  50%{ transform:translateY(-14px) rotateZ(.6deg); }
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-character-float{animation:none}
+}
+/* Inner: handles the cursor-driven 3D tilt (JS sets inline transform) */
 .hero-character-img{
   width:103%;
   max-width:430px;
   height:auto;
   display:block;
   filter:drop-shadow(0 30px 50px rgba(0,0,0,.5));
+  transform-style:preserve-3d;
+  will-change:transform;
+  transform:rotateX(0deg) rotateY(0deg);
+  transition:transform .25s cubic-bezier(.22,1,.36,1);
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-character-img{transition:none}
 }
 @media(max-width:900px){
   .hero-character-wrap{margin-bottom:-50px}
