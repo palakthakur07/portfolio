@@ -369,11 +369,13 @@ function buildProjects() {
             </div>
             <div class="mini-browser-screen">
               <iframe
+                id="liveiframe${i}"
                 src="${p.live}"
-                loading="lazy"
+                loading="eager"
                 title="${p.title} live preview"
                 sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                referrerpolicy="no-referrer">
+                referrerpolicy="no-referrer"
+                class="is-loading">
               </iframe>
             </div>
           </div>
@@ -410,6 +412,10 @@ function buildProjects() {
     list.appendChild(card);
 
     if (hasLive) {
+      const iframe = document.getElementById(`liveiframe${i}`);
+      iframe?.addEventListener('load', () => {
+        iframe.classList.remove('is-loading');
+      }, { once: true });
       return;
     }
 
@@ -583,58 +589,6 @@ function initHeroCharacterTilt() {
 
   wrap.addEventListener('mouseleave', () => {
     img.style.transform = 'rotateX(0deg) rotateY(0deg)';
-  });
-}
-
-/* =====================
-   ABOUT PHOTO UPLOAD
-===================== */
-function initAboutUpload() {
-  const input = document.getElementById('aboutInput');
-  const frame = document.getElementById('aboutFrame');
-  const img = document.getElementById('aboutImg');
-  const ph = document.getElementById('aboutPlaceholder');
-  const text = document.getElementById('aboutUploadText');
-  if (!input || !frame || !img) return;
-
-  const STORAGE_KEY = 'portfolio-about-photo';
-
-  const showImage = (dataUrl) => {
-    img.src = dataUrl;
-    img.style.display = 'block';
-    if (ph) ph.style.display = 'none';
-    if (text) text.textContent = 'Photo fixed';
-    frame.title = 'Uploaded photo';
-    frame.style.cursor = 'default';
-    input.disabled = true;
-  };
-
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) {
-    showImage(saved);
-  }
-
-  frame.addEventListener('click', e => {
-    if (!input.disabled) {
-      input.click();
-    } else {
-      e.preventDefault();
-    }
-  });
-
-  input.addEventListener('change', e => {
-    const f = e.target.files?.[0];
-    if (!f) return;
-
-    const r = new FileReader();
-    r.onload = ev => {
-      const dataUrl = ev.target.result;
-      if (typeof dataUrl === 'string') {
-        localStorage.setItem(STORAGE_KEY, dataUrl);
-        showImage(dataUrl);
-      }
-    };
-    r.readAsDataURL(f);
   });
 }
 
@@ -849,6 +803,33 @@ function initChipReveal() {
 }
 
 /* =====================
+   INFO CHIPS POP-IN ON VIEW
+===================== */
+function initInfoChipReveal() {
+  const chips = document.querySelectorAll('.info-chip');
+  if (!chips.length) return;
+
+  chips.forEach((chip, i) => chip.style.setProperty('--ci', i));
+
+  const container = document.querySelector('.info-chips');
+  if (!container || !('IntersectionObserver' in window)) {
+    chips.forEach(c => c.classList.add('in-view'));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        chips.forEach(c => c.classList.add('in-view'));
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  io.observe(container);
+}
+
+/* =====================
    MAGNETIC BUTTONS
 ===================== */
 /* =====================
@@ -968,12 +949,12 @@ document.addEventListener('DOMContentLoaded', () => {
   buildSkills();
   buildAchievements();
   initHeroCharacterTilt();
-  initAboutUpload();
   initResumeButton();
   initNav();
   initForm();
   initScrollReveal();
   initChipReveal();
+  initInfoChipReveal();
   initAchCounters();
   initTimelineLine();
   initMagneticButtons();
