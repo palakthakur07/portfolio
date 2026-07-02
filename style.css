@@ -941,7 +941,7 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 ===================== */
 .contact-grid{
   display:grid;grid-template-columns:1fr 1fr;
-  gap:5rem;align-items:start;margin-top:2rem;
+  gap:5rem;align-items:stretch;margin-top:2rem;
 }
 .contact-title{
   font-family:var(--syne);font-size:clamp(1.6rem,2.5vw,2rem);
@@ -979,6 +979,7 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 .form-card{
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--radius-lg);padding:2rem;
+  display:flex;flex-direction:column;
 }
 .f-row{margin-bottom:1.2rem}
 .f-label{
@@ -993,6 +994,19 @@ body{font-family:'Inter',sans-serif;background:#050505;color:#f0f0f0;line-height
 }
 .f-input:focus{border-color:var(--pink)}
 .f-input::placeholder{color:var(--text3)}
+.f-row:has(#fmsg){
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+.f-row:has(#fmsg) .f-input{
+  flex:1;
+  resize:none;
+  scrollbar-width:none; /* Firefox */
+}
+.f-row:has(#fmsg) .f-input::-webkit-scrollbar{
+  display:none; /* Chrome, Safari, Edge */
+}
 .f-btn{
   width:100%;background:var(--pink);color:#fff;border:none;
   border-radius:var(--radius);padding:.7rem;
