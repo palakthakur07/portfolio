@@ -123,33 +123,33 @@ const SKILLS = [
 const ACH = [
   {
     num: '01.',
-    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.7 5.4L20 8.2l-4 4.1.9 5.7L12 15.8 7.1 18l.9-5.7-4-4.1 5.3-.8L12 2z"/></svg>`,
-    title: 'Hackathon Participation',
-    desc: 'Built and presented AI-focused projects in collaborative hackathon environments.'
-  },
-  {
-    num: '02.',
-    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
-    title: 'DSA & Coding Growth',
-    desc: 'Strengthened problem-solving through consistent practice on competitive platforms.'
-  },
-  {
-    num: '03.',
-    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
-    title: 'Portfolio & Web Builds',
-    desc: 'Created responsive, modern web projects showcasing technical skills and design thinking.'
-  },
-  {
-    num: '04.',
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2a9 9 0 1 0 7.5 14.5L21 19"/><path d="M11 6a5 5 0 1 1 0 10"/></svg>`,
     title: 'Most Innovative Project — Elite Her',
     desc: 'Won Most Innovative Project at the Elite Her Hackathon for building a Deepfake Detection Platform using the Sightengine API for AI-based analysis, with an accessible upload interface.'
   },
   {
-    num: '05.',
+    num: '02.',
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>`,
     title: '3rd Position — BIZMARK',
     desc: 'Placed 3rd in BIZMARK, a marketing case-competition by DTU Consulting Group, applying structured, data-driven problem-solving under a tight time constraint.'
+  },
+  {
+    num: '03.',
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.7 5.4L20 8.2l-4 4.1.9 5.7L12 15.8 7.1 18l.9-5.7-4-4.1 5.3-.8L12 2z"/></svg>`,
+    title: 'Hackathon Participation',
+    desc: 'Reached the finals in multiple hackathons, building and presenting AI-focused projects in fast-paced, collaborative environments.'
+  },
+  {
+    num: '04.',
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+    title: 'DSA & Coding Growth',
+    desc: 'Solved 300+ problems across LeetCode, CodeChef, and TakeUForward (Striver\'s SDE Sheet), building strong problem-solving and analytical skills.'
+  },
+  {
+    num: '05.',
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+   title: 'Shipped Web Projects',
+  desc: 'Designed and deployed RoadSOS and the Deepfake Detection Platform, along with this portfolio site — real-world web projects built from scratch and live in production.'
   }
 ];
 
